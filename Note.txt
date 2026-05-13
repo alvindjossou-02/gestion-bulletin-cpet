@@ -1,0 +1,72 @@
+CHAPITRE 1 : PRESENTATION DU CONTEXTE D’ETUDE
+CHAPITRE 2 : ANALYSE DES BESOINS ET CONCEPTION 
+DU SYSTEME 
+CHAPITRE 3 : REALISATION ET TESTS DE 
+L’APPLICATION
+CHAPITRE 4 : DISCUSSIONS, LIMITES ET 
+PERSPECTIVES FUTURES DES RESULTATS
+Propose moi une table des matières pour structurer ces chapitres en règle avec le projet en cours qui a pour thème : Conception et mise en œuvre d’un système de suivi des apprenants 
+et génération de bulletins : cas du CPET - Le Digital
+
+
+
+PHASE 1 : Base de données
+
+Table 1: users : Connexion admin/professeurs
+id
+name
+email
+password
+role
+
+Table 2 : filieres
+id
+nom_filiere
+
+Exemples :
+RSI
+F2
+HR
+MMV
+F3
+F4
+
+Table 3 : classes
+id
+nom_classe
+
+Exemples :
+Seconde
+Première
+Terminale
+
+Table 4 : apprenants
+id
+nom
+prenom
+matricule
+sexe
+date_naissance
+filiere_id
+classe_id
+
+Table 5 : matieres
+id
+nom_matiere
+coefficient
+filiere_id
+
+Table 6 : notes
+id
+apprenant_id
+matiere_id
+type_evaluation
+note
+
+Table 7 : bulletins
+id
+apprenant_id
+moyenne_generale
+rang
+appreciation
+trimestre
