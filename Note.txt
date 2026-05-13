@@ -1,0 +1,168 @@
+CHAPITRE 1 : PRESENTATION DU CONTEXTE D’ETUDE
+CHAPITRE 2 : ANALYSE DES BESOINS ET CONCEPTION 
+DU SYSTEME 
+CHAPITRE 3 : REALISATION ET TESTS DE 
+L’APPLICATION
+CHAPITRE 4 : DISCUSSIONS, LIMITES ET 
+PERSPECTIVES FUTURES DES RESULTATS
+Propose moi une table des matières pour structurer ces chapitres en règle avec le projet en cours qui a pour thème : Conception et mise en œuvre d’un système de suivi des apprenants 
+et génération de bulletins : cas du CPET - Le Digital
+
+
+
+PHASE 1 : Base de données
+
+Table 1: users : Connexion admin/professeurs
+id
+name
+email
+password
+role
+
+Table 2 : filieres
+id
+nom_filiere
+
+Exemples :
+RSI
+F2
+HR
+MMV
+F3
+F4
+
+Table 3 : classes
+id
+nom_classe
+
+Exemples :
+Seconde
+Première
+Terminale
+
+Table 4 : apprenants
+id
+nom
+prenom
+matricule
+sexe
+date_naissance
+filiere_id
+classe_id
+
+Table 5 : matieres
+id
+nom_matiere
+coefficient
+filiere_id
+
+Table 6 : notes
+id
+apprenant_id
+matiere_id
+type_evaluation
+note
+
+Table 7 : bulletins
+id
+apprenant_id
+moyenne_generale
+rang
+appreciation
+trimestre
+
+
+
+PHASE 2 : Authentification
+
+Avec Laravel Breeze
+
+login admin
+login enseignant
+
+PHASE 3 : Gestion des filières
+
+Créer :
+
+ajouter filière
+modifier
+supprimer
+afficher liste
+
+PHASE 4 : Gestion des classes
+
+Créer :
+
+Seconde
+Première
+Terminale
+
+CRUD classique
+
+PHASE 5 : Gestion des matières
+
+Associer matières à chaque filière
+
+Exemple :
+
+RSI :
+
+Réseau
+Sécurité
+Algorithmique
+
+HR :
+
+Cuisine
+Service restaurant
+
+PHASE 6 : Gestion des apprenants
+
+Ajout :
+
+nom
+prénom
+matricule
+classe
+filière
+
+PHASE 7 : Saisie des notes
+
+L’enseignant :
+
+choisit classe
+choisit filière
+choisit matière
+saisit notes
+
+PHASE 8 : Calcul automatique
+
+Calcul :
+
+moyenne matière
+moyenne générale
+total points
+rang
+appréciation
+
+PHASE 9 : Génération bulletin
+
+Afficher :
+
+nom élève
+classe
+filière
+matières
+notes
+moyenne
+rang
+
+PHASE 10 : Export PDF
+
+Avec :
+
+barryvdh/laravel-dompdf
+
+Nom fichier :
+
+Bulletin_Nom_Prenom.pdf
