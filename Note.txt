@@ -166,3 +166,9 @@ barryvdh/laravel-dompdf
 Nom fichier :
 
 Bulletin_Nom_Prenom.pdf
+
+
+
+
+Middleware pour protéger les routes.
+Spatie Permission pour masquer les menus selon le rôle

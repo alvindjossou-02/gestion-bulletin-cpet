@@ -15,6 +15,41 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <!-- Menu ADMINISTRATEUR & DIRECTEUR -->
+                    @if(auth()->user()->hasRole(['administrateur', 'directeur']))
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                            {{ __('Utilisateurs') }}
+                        </x-nav-link>
+                    @endif
+
+                    <!-- Menu SAISIR LES NOTES -->
+                    @if(auth()->user()->hasPermissionTo('saisir_notes'))
+                        <x-nav-link href="#" :active="request()->routeIs('notes.*')">
+                            {{ __('Saisir Notes') }}
+                        </x-nav-link>
+                    @endif
+
+                    <!-- Menu CONSULTER SES NOTES (APPRENANTS) -->
+                    @if(auth()->user()->hasPermissionTo('consulter_propres_notes'))
+                        <x-nav-link href="#" :active="request()->routeIs('my-notes.*')">
+                            {{ __('Mes Notes') }}
+                        </x-nav-link>
+                    @endif
+
+                    <!-- Menu GÉNÉRER BULLETINS -->
+                    @if(auth()->user()->hasPermissionTo('generer_bulletins_pdf'))
+                        <x-nav-link href="#" :active="request()->routeIs('bulletins.*')">
+                            {{ __('Bulletins') }}
+                        </x-nav-link>
+                    @endif
+
+                    <!-- Menu STATISTIQUES -->
+                    @if(auth()->user()->hasPermissionTo('consulter_statistiques'))
+                        <x-nav-link href="#" :active="request()->routeIs('statistics.*')">
+                            {{ __('Statistiques') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,6 +105,41 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <!-- Menu ADMINISTRATEUR & DIRECTEUR (Mobile) -->
+            @if(auth()->user()->hasRole(['administrateur', 'directeur']))
+                <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                    {{ __('Utilisateurs') }}
+                </x-responsive-nav-link>
+            @endif
+
+            <!-- Menu SAISIR LES NOTES (Mobile) -->
+            @if(auth()->user()->hasPermissionTo('saisir_notes'))
+                <x-responsive-nav-link href="#">
+                    {{ __('Saisir Notes') }}
+                </x-responsive-nav-link>
+            @endif
+
+            <!-- Menu CONSULTER SES NOTES (Mobile) -->
+            @if(auth()->user()->hasPermissionTo('consulter_propres_notes'))
+                <x-responsive-nav-link href="#">
+                    {{ __('Mes Notes') }}
+                </x-responsive-nav-link>
+            @endif
+
+            <!-- Menu GÉNÉRER BULLETINS (Mobile) -->
+            @if(auth()->user()->hasPermissionTo('generer_bulletins_pdf'))
+                <x-responsive-nav-link href="#">
+                    {{ __('Bulletins') }}
+                </x-responsive-nav-link>
+            @endif
+
+            <!-- Menu STATISTIQUES (Mobile) -->
+            @if(auth()->user()->hasPermissionTo('consulter_statistiques'))
+                <x-responsive-nav-link href="#">
+                    {{ __('Statistiques') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

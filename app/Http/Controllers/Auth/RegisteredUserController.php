@@ -20,7 +20,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        // Récupérer les rôles disponibles pour l'enregistrement
+        $rolesAvailables = ['apprenant', 'enseignant'];
+        return view('auth.register', compact('rolesAvailables'));
     }
 
     /**
@@ -34,13 +36,18 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'in:apprenant,enseignant'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
         ]);
+
+        // Assigner le rôle à l'utilisateur via Spatie
+        $user->assignRole($request->role);
 
         event(new Registered($user));
 
