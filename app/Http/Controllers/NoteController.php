@@ -6,6 +6,7 @@ use App\Models\Note;
 use App\Models\Apprenant;
 use App\Models\Matiere;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class NoteController extends Controller
 {
@@ -101,15 +102,29 @@ class NoteController extends Controller
      */
     public function myNotes()
     {
-        if (!auth()->user()->hasRole('apprenant')) {
+        $user = auth()->user();
+
+        if (!$user->hasRole('apprenant')) {
             abort(403, 'Seuls les apprenants peuvent consulter leurs notes.');
         }
 
-        // Chercher l'apprenant associé à l'utilisateur (relation à créer dans le modèle User)
-        $notes = Note::whereHas('apprenant', function($query) {
-            $query->where('email', auth()->user()->email);
-        })->with('matiere')->get();
+        $isLinked = false;
 
-        return view('notes.my-notes', compact('notes'));
+        if (Schema::hasColumn('apprenants', 'user_id')) {
+            $isLinked = true;
+            $notes = Note::whereHas('apprenant', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })->with('matiere')->get();
+        } elseif (Schema::hasColumn('apprenants', 'email')) {
+            $isLinked = true;
+            $notes = Note::whereHas('apprenant', function ($query) use ($user) {
+                $query->where('email', $user->email);
+            })->with('matiere')->get();
+        } else {
+            // No direct apprenant-user link available yet.
+            $notes = collect();
+        }
+
+        return view('notes.my-notes', compact('notes', 'isLinked'));
     }
 }

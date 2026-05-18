@@ -1,0 +1,65 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl font-bold">Bulletins</h1>
+                    <a href="{{ route('bulletins.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700">
+                        + Générer Bulletin
+                    </a>
+                </div>
+
+                @if(session('success'))
+                    <div class="mb-4 p-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if($bulletins->count())
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">Apprenant</th>
+                                    <th scope="col" class="px-6 py-3">Trimestre</th>
+                                    <th scope="col" class="px-6 py-3">Moyenne</th>
+                                    <th scope="col" class="px-6 py-3">Rang</th>
+                                    <th scope="col" class="px-6 py-3">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($bulletins as $bulletin)
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                        <td class="px-6 py-4 font-medium">{{ $bulletin->apprenant?->nom ?? 'N/A' }}</td>
+                                        <td class="px-6 py-4">{{ $bulletin->trimestre }}</td>
+                                        <td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-blue-100 text-blue-800">{{ $bulletin->moyenne_generale }}/20</span></td>
+                                        <td class="px-6 py-4">{{ $bulletin->rang }}e</td>
+                                        <td class="px-6 py-4 flex gap-2">
+                                            <a href="{{ route('bulletins.pdf', $bulletin) }}" class="text-red-600 hover:text-red-900" title="Télécharger PDF">PDF</a>
+                                            <a href="{{ route('bulletins.edit', $bulletin) }}" class="text-indigo-600 hover:text-indigo-900">Modifier</a>
+                                            <form method="POST" action="{{ route('bulletins.destroy', $bulletin) }}" class="inline" onsubmit="return confirm('Êtes-vous sûr ?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:text-red-900">Supprimer</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-6">
+                        {{ $bulletins->links() }}
+                    </div>
+                @else
+                    <p class="text-gray-500 text-center py-8">Aucun bulletin généré.</p>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

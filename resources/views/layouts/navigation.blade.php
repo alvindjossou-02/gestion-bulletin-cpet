@@ -23,30 +23,50 @@
                         </x-nav-link>
                     @endif
 
+                    <!-- Menu GESTION DES APPRENANTS -->
+                    @if(auth()->user()->hasPermissionTo('gerer_apprenants'))
+                        <x-nav-link :href="route('apprenants.index')" :active="request()->routeIs('apprenants.*')">
+                            {{ __('Apprenants') }}
+                        </x-nav-link>
+                    @endif
+
+                    <!-- Menu GESTION CLASSES / FILIERES / MATIERES -->
+                    @if(auth()->user()->hasPermissionTo('gerer_classes_filieres'))
+                        <x-nav-link :href="route('classes.index')" :active="request()->routeIs('classes.*')">
+                            {{ __('Classes') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('filieres.index')" :active="request()->routeIs('filieres.*')">
+                            {{ __('Filières') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('matieres.index')" :active="request()->routeIs('matieres.*')">
+                            {{ __('Matières') }}
+                        </x-nav-link>
+                    @endif
+
                     <!-- Menu SAISIR LES NOTES -->
                     @if(auth()->user()->hasPermissionTo('saisir_notes'))
-                        <x-nav-link href="#" :active="request()->routeIs('notes.*')">
+                        <x-nav-link :href="route('notes.index')" :active="request()->routeIs('notes.*')">
                             {{ __('Saisir Notes') }}
                         </x-nav-link>
                     @endif
 
                     <!-- Menu CONSULTER SES NOTES (APPRENANTS) -->
                     @if(auth()->user()->hasPermissionTo('consulter_propres_notes'))
-                        <x-nav-link href="#" :active="request()->routeIs('my-notes.*')">
+                        <x-nav-link :href="route('my-notes.index')" :active="request()->routeIs('my-notes.*')">
                             {{ __('Mes Notes') }}
                         </x-nav-link>
                     @endif
 
                     <!-- Menu GÉNÉRER BULLETINS -->
                     @if(auth()->user()->hasPermissionTo('generer_bulletins_pdf'))
-                        <x-nav-link href="#" :active="request()->routeIs('bulletins.*')">
+                        <x-nav-link :href="route('bulletins.index')" :active="request()->routeIs('bulletins.*')">
                             {{ __('Bulletins') }}
                         </x-nav-link>
                     @endif
 
                     <!-- Menu STATISTIQUES -->
                     @if(auth()->user()->hasPermissionTo('consulter_statistiques'))
-                        <x-nav-link href="#" :active="request()->routeIs('statistics.*')">
+                        <x-nav-link :href="route('statistics.index')" :active="request()->routeIs('statistics.*')">
                             {{ __('Statistiques') }}
                         </x-nav-link>
                     @endif
@@ -113,30 +133,50 @@
                 </x-responsive-nav-link>
             @endif
 
+            <!-- Menu GESTION DES APPRENANTS (Mobile) -->
+            @if(auth()->user()->hasPermissionTo('gerer_apprenants'))
+                <x-responsive-nav-link :href="route('apprenants.index')" :active="request()->routeIs('apprenants.*')">
+                    {{ __('Apprenants') }}
+                </x-responsive-nav-link>
+            @endif
+
+            <!-- Menu GESTION CLASSES / FILIERES / MATIERES (Mobile) -->
+            @if(auth()->user()->hasPermissionTo('gerer_classes_filieres'))
+                <x-responsive-nav-link :href="route('classes.index')" :active="request()->routeIs('classes.*')">
+                    {{ __('Classes') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('filieres.index')" :active="request()->routeIs('filieres.*')">
+                    {{ __('Filières') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('matieres.index')" :active="request()->routeIs('matieres.*')">
+                    {{ __('Matières') }}
+                </x-responsive-nav-link>
+            @endif
+
             <!-- Menu SAISIR LES NOTES (Mobile) -->
             @if(auth()->user()->hasPermissionTo('saisir_notes'))
-                <x-responsive-nav-link href="#">
+                <x-responsive-nav-link :href="route('notes.index')" :active="request()->routeIs('notes.*')">
                     {{ __('Saisir Notes') }}
                 </x-responsive-nav-link>
             @endif
 
             <!-- Menu CONSULTER SES NOTES (Mobile) -->
             @if(auth()->user()->hasPermissionTo('consulter_propres_notes'))
-                <x-responsive-nav-link href="#">
+                <x-responsive-nav-link :href="route('my-notes.index')" :active="request()->routeIs('my-notes.*')">
                     {{ __('Mes Notes') }}
                 </x-responsive-nav-link>
             @endif
 
             <!-- Menu GÉNÉRER BULLETINS (Mobile) -->
             @if(auth()->user()->hasPermissionTo('generer_bulletins_pdf'))
-                <x-responsive-nav-link href="#">
+                <x-responsive-nav-link :href="route('bulletins.index')" :active="request()->routeIs('bulletins.*')">
                     {{ __('Bulletins') }}
                 </x-responsive-nav-link>
             @endif
 
             <!-- Menu STATISTIQUES (Mobile) -->
             @if(auth()->user()->hasPermissionTo('consulter_statistiques'))
-                <x-responsive-nav-link href="#">
+                <x-responsive-nav-link :href="route('statistics.index')" :active="request()->routeIs('statistics.*')">
                     {{ __('Statistiques') }}
                 </x-responsive-nav-link>
             @endif

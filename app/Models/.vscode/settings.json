@@ -1,0 +1,18 @@
+{
+  "files.watcherExclude": {
+    "**/vendor/**": true,
+    "**/node_modules/**": true,
+    "**/storage/logs/**": true,
+    "**/bootstrap/cache/**": true
+  },
+
+  "search.exclude": {
+    "**/vendor": true,
+    "**/node_modules": true
+  },
+
+  "files.exclude": {
+    "**/vendor": true,
+    "**/node_modules": true
+  }
+}
