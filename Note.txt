@@ -23,22 +23,11 @@ Table 2 : filieres
 id
 nom_filiere
 
-Exemples :
-RSI
-F2
-HR
-MMV
-F3
-F4
 
 Table 3 : classes
 id
 nom_classe
 
-Exemples :
-Seconde
-Première
-Terminale
 
 Table 4 : apprenants
 id
@@ -172,3 +161,14 @@ Bulletin_Nom_Prenom.pdf
 
 Middleware pour protéger les routes.
 Spatie Permission pour masquer les menus selon le rôle
+
+
+
+
+
+
+
+Je veux que tu déplace la barre de navigation sur le côté gauche. Il doit être élégant et digne d'une navigation latérale de site professionnelle. Equipe le d'un bouton qui permet de le ranger comme sur chatgpt. 
+Laisse le menu déroulant qui donne accès au profil et à la déconnection là ou il est actuellement, ne le déplace pas contrairement à la barre de navigation. Tu devras juste le rendre plus élégant.
+Je viens d'ajouter un image dans le dossier source de gestion-bulletin-cpet. Utilise le comme logo pour le site. Met le à l'opposer du menu déroulant comme sur les sites pro. Ajoute juste à côté du logo "Gestion Bulletin CPET". L'image et l'écrit formeront le logo du site. 
+Utilise les couleurs du l'image et applique les au site. Harmonise le tout pour un rendu optimal. 

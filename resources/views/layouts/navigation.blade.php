@@ -57,6 +57,14 @@
                         </x-nav-link>
                     @endif
 
+
+                    <!-- Menu ENREGISTRER ABSENCES -->
+                    @if(auth()->user()->hasPermissionTo('enregistrer_absences'))
+                        <x-nav-link :href="route('absences.index')" :active="request()->routeIs('absences.*')">
+                            {{ __('Absences') }}
+                        </x-nav-link>
+                    @endif
+
                     <!-- Menu GÉNÉRER BULLETINS -->
                     @if(auth()->user()->hasPermissionTo('generer_bulletins_pdf'))
                         <x-nav-link :href="route('bulletins.index')" :active="request()->routeIs('bulletins.*')">
@@ -164,6 +172,14 @@
             @if(auth()->user()->hasPermissionTo('consulter_propres_notes'))
                 <x-responsive-nav-link :href="route('my-notes.index')" :active="request()->routeIs('my-notes.*')">
                     {{ __('Mes Notes') }}
+                </x-responsive-nav-link>
+            @endif
+
+
+            <!-- Menu ENREGISTRER ABSENCES (Mobile) -->
+            @if(auth()->user()->hasPermissionTo('enregistrer_absences'))
+                <x-responsive-nav-link :href="route('absences.index')" :active="request()->routeIs('absences.*')">
+                    {{ __('Absences') }}
                 </x-responsive-nav-link>
             @endif
 

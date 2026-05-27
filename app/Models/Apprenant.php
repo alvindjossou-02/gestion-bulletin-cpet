@@ -17,10 +17,12 @@ class Apprenant extends Model
         'date_naissance',
         'filiere_id',
         'classe_id',
+        'reboublant',
     ];
 
     protected $casts = [
         'date_naissance' => 'date',
+        'reboublant' => 'boolean',
     ];
 
     public function filiere()
@@ -41,5 +43,10 @@ class Apprenant extends Model
     public function bulletins()
     {
         return $this->hasMany(Bulletin::class);
+    }
+
+    public function absences()
+    {
+        return $this->hasMany(Absence::class);
     }
 }

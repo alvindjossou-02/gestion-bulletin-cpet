@@ -41,7 +41,11 @@ class ApprenantController extends Controller
             'date_naissance' => 'required|date',
             'filiere_id' => 'required|exists:filieres,id',
             'classe_id' => 'required|exists:classes,id',
+            'reboublant' => 'sometimes|boolean',
         ]);
+
+        // Normalize checkbox input (present when checked)
+        $validated['reboublant'] = $request->has('reboublant');
 
         Apprenant::create($validated);
 
@@ -80,7 +84,10 @@ class ApprenantController extends Controller
             'date_naissance' => 'required|date',
             'filiere_id' => 'required|exists:filieres,id',
             'classe_id' => 'required|exists:classes,id',
+            'reboublant' => 'sometimes|boolean',
         ]);
+
+        $validated['reboublant'] = $request->has('reboublant');
 
         $apprenant->update($validated);
 

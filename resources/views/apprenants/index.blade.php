@@ -27,6 +27,7 @@
                                     <th class="px-6 py-3">Sexe</th>
                                     <th class="px-6 py-3">Filière</th>
                                     <th class="px-6 py-3">Classe</th>
+                                    <th class="px-6 py-3">Reboublant</th>
                                     <th class="px-6 py-3">Actions</th>
                                 </tr>
                             </thead>
@@ -39,6 +40,13 @@
                                         <td class="px-6 py-4">{{ $apprenant->sexe }}</td>
                                         <td class="px-6 py-4">{{ $apprenant->filiere?->nom_filiere ?? 'N/A' }}</td>
                                         <td class="px-6 py-4">{{ $apprenant->classe?->nom_classe ?? 'N/A' }}</td>
+                                        <td class="px-6 py-4">
+                                            @if($apprenant->reboublant)
+                                                <span class="px-2 py-1 rounded-full bg-yellow-100 text-yellow-800">Oui</span>
+                                            @else
+                                                <span class="px-2 py-1 rounded-full bg-green-100 text-green-800">Non</span>
+                                            @endif
+                                        </td>
                                         <td class="px-6 py-4 space-x-2">
                                             <a href="{{ route('apprenants.edit', $apprenant) }}" class="text-indigo-600 hover:text-indigo-900">Modifier</a>
                                             <form action="{{ route('apprenants.destroy', $apprenant) }}" method="POST" class="inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet apprenant ?');">

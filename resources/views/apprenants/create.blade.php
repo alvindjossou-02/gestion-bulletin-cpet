@@ -50,6 +50,13 @@
                     </div>
 
                     <div>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="reboublant" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ old('reboublant') ? 'checked' : '' }}>
+                            <span class="ms-2 text-sm text-gray-700 dark:text-gray-300">Reboublant</span>
+                        </label>
+                    </div>
+
+                    <div>
                         <label for="filiere_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Filière</label>
                         <select id="filiere_id" name="filiere_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required>
                             <option value="">-- Sélectionner une filière --</option>

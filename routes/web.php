@@ -9,6 +9,7 @@ use App\Http\Controllers\MatiereController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\BulletinController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\AbsenceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -80,8 +81,8 @@ Route::middleware(['auth', 'verified', 'permission:consulter_statistiques'])->pr
 });
 
 // ==================== ROUTES ENREGISTREMENT ABSENCES ====================
-Route::middleware(['auth', 'verified', 'permission:enregistrer_absences'])->prefix('absences')->name('absences.')->group(function () {
-    // À implémenter: Route::resource('absences', AbsenceController::class);
+Route::middleware(['auth', 'verified', 'permission:enregistrer_absences'])->group(function () {
+    Route::resource('absences', AbsenceController::class);
 });
 
 require __DIR__.'/auth.php';
