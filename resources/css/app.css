@@ -1,3 +1,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Force tous les fonds à être blanc */
+body,
+html {
+    background-color: white !important;
+    color: #111827 !important;
+}
+
+/* Remplace tous les backgrounds sombres par blanc */
+* {
+    --tw-bg-opacity: 1;
+}
+
+.bg-gray-50,
+.bg-gray-100,
+.bg-gray-200,
+.bg-gray-700,
+.bg-gray-800,
+.bg-white,
+div[class*="dark:bg-"],
+[class*="dark:bg-gray-"],
+[class*="dark:bg-white"] {
+    background-color: white !important;
+}
+
+/* Assure que le texte reste visible */
+.text-gray-500,
+.text-gray-600,
+.text-gray-700,
+.text-gray-900,
+[class*="dark:text-"] {
+    color: #111827 !important;
+}
+
+/* Tables */
+table {
+    background-color: white !important;
+}
+
+thead,
+tbody tr {
+    background-color: white !important;
+}
+
+thead th {
+    background-color: #F3F4F6 !important;
+    color: #111827 !important;
+}
+
+tbody tr {
+    background-color: white !important;
+    border-color: #E5E7EB !important;
+}
+
+tbody tr:hover {
+    background-color: #F9FAFB !important;
+}
+
+/* Conteneurs */
+.overflow-hidden,
+.shadow-sm {
+    background-color: white !important;
+}
+
+/* Alertes */
+.bg-green-50 {
+    background-color: #F0FDF4 !important;
+}
+
+.bg-red-50 {
+    background-color: #FEF2F2 !important;
+}
+
+.bg-blue-50 {
+    background-color: #EFF6FF !important;
+}

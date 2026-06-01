@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app-sidebar')
+
+@section('title', 'Gestion Utilisateurs - Gestion Bulletin CPET')
 
 @section('content')
 <div class="py-12">
