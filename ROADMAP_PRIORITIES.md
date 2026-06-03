@@ -161,11 +161,13 @@ tests/Unit/
 - [ ] Affichage logs dans admin
 
 **Événements à logger**:
+- ✓ Qui se connecte (date et heure)
 - ✓ Modification d'une note
 - ✓ Assignation d'un rôle
 - ✓ Suppression d'un apprenant
 - ✓ Génération d'un bulletin
 - ✓ Enregistrement absence
+- ✓ Qui crée un compte
 
 **Package**: `spatie/laravel-activity-log`
 

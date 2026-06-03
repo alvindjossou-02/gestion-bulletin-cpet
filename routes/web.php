@@ -10,6 +10,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\BulletinController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\AbsenceController;
+use App\Http\Controllers\AuditLogController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -83,6 +84,13 @@ Route::middleware(['auth', 'verified', 'permission:consulter_statistiques'])->pr
 // ==================== ROUTES ENREGISTREMENT ABSENCES ====================
 Route::middleware(['auth', 'verified', 'permission:enregistrer_absences'])->group(function () {
     Route::resource('absences', AbsenceController::class);
+});
+
+// ==================== ROUTES JOURNAUX D'AUDIT ====================
+Route::middleware(['auth', 'verified', 'role:administrateur,directeur'])->group(function () {
+    Route::get('admin/audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
+    Route::get('admin/audit-logs/{auditLog}', [AuditLogController::class, 'show'])->name('audit-logs.show');
+    Route::get('admin/audit-logs/export', [AuditLogController::class, 'export'])->name('audit-logs.export');
 });
 
 require __DIR__.'/auth.php';
