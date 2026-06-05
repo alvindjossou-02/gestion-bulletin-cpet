@@ -43,10 +43,11 @@ class StatisticsController extends Controller
      */
     private function getTopApprenants($limit = 10)
     {
-        return Bulletin::with('apprenant')
+        return Bulletin::query()
+            ->with('apprenant:id,nom,prenom')
             ->orderByDesc('moyenne_generale')
             ->limit($limit)
-            ->get();
+            ->get(['id', 'apprenant_id', 'moyenne_generale']);
     }
 
     /**
@@ -54,24 +55,22 @@ class StatisticsController extends Controller
      */
     private function getClassesStats()
     {
-        return Classe::withCount('apprenants')
-            ->with([
-                'apprenants' => function($query) {
-                    $query->with('bulletins');
-                }
-            ])
+        // Agrégation côté base pour éviter les chargements N+1 et les calculs PHP coûteux
+        // Hypothèse: bulletins.moyenne_generale contient une moyenne sur 20.
+        return Classe::query()
+            ->select('classes.id', 'classes.nom_classe')
+            ->withCount('apprenants')
+            ->leftJoin('apprenants', 'apprenants.classe_id', '=', 'classes.id')
+            ->leftJoin('bulletins', 'bulletins.apprenant_id', '=', 'apprenants.id')
+            ->groupBy('classes.id', 'classes.nom_classe')
+            ->selectRaw('COUNT(DISTINCT apprenants.id) as total_apprenants_calc')
+            ->selectRaw('COALESCE(AVG(bulletins.moyenne_generale), 0) as moyenne_generale')
             ->get()
-            ->map(function($classe) {
-                $moyennes = $classe->apprenants
-                    ->flatMap(fn($a) => $a->bulletins)
-                    ->pluck('moyenne_generale');
-
-                return [
-                    'nom' => $classe->nom_classe,
-                    'total_apprenants' => $classe->apprenants_count,
-                    'moyenne_generale' => $moyennes->count() ? $moyennes->avg() : 0,
-                ];
-            });
+            ->map(fn ($classe) => [
+                'nom' => $classe->nom_classe,
+                'total_apprenants' => (int) $classe->total_apprenants_calc,
+                'moyenne_generale' => (float) $classe->moyenne_generale,
+            ]);
     }
 
     /**
@@ -79,24 +78,21 @@ class StatisticsController extends Controller
      */
     private function getFilieresStats()
     {
-        return Filiere::withCount('apprenants')
-            ->with([
-                'apprenants' => function($query) {
-                    $query->with('bulletins');
-                }
-            ])
+        // Agrégation côté base pour éviter les chargements N+1 et les calculs PHP coûteux
+        return Filiere::query()
+            ->select('filieres.id', 'filieres.nom_filiere')
+            ->withCount('apprenants')
+            ->leftJoin('apprenants', 'apprenants.filiere_id', '=', 'filieres.id')
+            ->leftJoin('bulletins', 'bulletins.apprenant_id', '=', 'apprenants.id')
+            ->groupBy('filieres.id', 'filieres.nom_filiere')
+            ->selectRaw('COUNT(DISTINCT apprenants.id) as total_apprenants_calc')
+            ->selectRaw('COALESCE(AVG(bulletins.moyenne_generale), 0) as moyenne_generale')
             ->get()
-            ->map(function($filiere) {
-                $moyennes = $filiere->apprenants
-                    ->flatMap(fn($a) => $a->bulletins)
-                    ->pluck('moyenne_generale');
-
-                return [
-                    'nom' => $filiere->nom_filiere,
-                    'total_apprenants' => $filiere->apprenants_count,
-                    'moyenne_generale' => $moyennes->count() ? $moyennes->avg() : 0,
-                ];
-            });
+            ->map(fn ($filiere) => [
+                'nom' => $filiere->nom_filiere,
+                'total_apprenants' => (int) $filiere->total_apprenants_calc,
+                'moyenne_generale' => (float) $filiere->moyenne_generale,
+            ]);
     }
 
     /**

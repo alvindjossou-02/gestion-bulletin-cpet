@@ -528,6 +528,7 @@
     </style>
 </head>
 <body>
+    
     <div class="app-container" id="appContainer">
         <!-- SIDEBAR -->
         <aside class="sidebar" id="sidebar">
@@ -667,11 +668,40 @@
                 </div>
             </div>
 
+            <!-- Alerts -->
+            <?php if(session('success')): ?>
+                <div class="content-wrapper mb-4">
+                    <div class="mb-4 p-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">
+                        <?php echo e(session('success')); ?>
+
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if(session('error')): ?>
+                <div class="content-wrapper mb-4">
+                    <div class="mb-4 p-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+                        <?php echo e(session('error')); ?>
+
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if(session('status')): ?>
+                <div class="content-wrapper mb-4">
+                    <div class="mb-4 p-4 text-sm text-indigo-800 rounded-lg bg-indigo-50 dark:bg-gray-800 dark:text-indigo-300">
+                        <?php echo e(session('status')); ?>
+
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <!-- CONTENT -->
             <div class="content-area">
                 <div class="content-wrapper">
                     <?php echo $__env->yieldContent('content'); ?>
                 </div>
+
 
                 <!-- FOOTER -->
                 <footer class="page-footer">

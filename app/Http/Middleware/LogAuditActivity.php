@@ -14,27 +14,33 @@ class LogAuditActivity
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $response = $next($request);
+        try {
+            $response = $next($request);
 
-        // Logger les connexions
-        if ($request->routeIs('login') && $request->isMethod('post')) {
-            \Log::info('Login attempt detected', [
-                'response_status' => $response->status(),
-                'is_authenticated' => auth()->check(),
-                'route' => $request->route()?->getName(),
-            ]);
-            
-            if ($response->status() === 302) {
-                $this->logLogin($request);
+            // Logger les connexions
+            if ($request->routeIs('login') && $request->isMethod('post')) {
+                \Log::info('Login attempt detected', [
+                    'response_status' => $response->status(),
+                    'is_authenticated' => auth()->check(),
+                    'route' => $request->route()?->getName(),
+                ]);
+                
+                if ($response->status() === 302 || $response->status() === 301) {
+                    $this->logLogin($request);
+                }
             }
-        }
 
-        // Logger les déconnexions
-        if ($request->routeIs('logout') && $request->isMethod('post')) {
-            $this->logLogout();
-        }
+            // Logger les déconnexions
+            if ($request->routeIs('logout') && $request->isMethod('post')) {
+                $this->logLogout();
+            }
 
-        return $response;
+            return $response;
+        } catch (\Exception $e) {
+            \Log::error('LogAuditActivity middleware error: ' . $e->getMessage());
+            // Continuer malgré l'erreur de logging
+            return $next($request);
+        }
     }
 
     /**

@@ -528,6 +528,7 @@
     </style>
 </head>
 <body>
+    {{-- Layout utilisé via @extends('layouts.app-sidebar') --}}
     <div class="app-container" id="appContainer">
         <!-- SIDEBAR -->
         <aside class="sidebar" id="sidebar">
@@ -667,11 +668,37 @@
                 </div>
             </div>
 
+            <!-- Alerts -->
+            @if(session('success'))
+                <div class="content-wrapper mb-4">
+                    <div class="mb-4 p-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="content-wrapper mb-4">
+                    <div class="mb-4 p-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+                        {{ session('error') }}
+                    </div>
+                </div>
+            @endif
+
+            @if(session('status'))
+                <div class="content-wrapper mb-4">
+                    <div class="mb-4 p-4 text-sm text-indigo-800 rounded-lg bg-indigo-50 dark:bg-gray-800 dark:text-indigo-300">
+                        {{ session('status') }}
+                    </div>
+                </div>
+            @endif
+
             <!-- CONTENT -->
             <div class="content-area">
                 <div class="content-wrapper">
                     @yield('content')
                 </div>
+
 
                 <!-- FOOTER -->
                 <footer class="page-footer">

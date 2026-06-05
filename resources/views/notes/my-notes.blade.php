@@ -1,11 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.app-sidebar')
+
+@section('title', 'Mes Notes - Gestion Bulletin CPET')
 
 @section('content')
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
-                <h1 class="text-2xl font-bold mb-6">Mes Notes</h1>
+        <h1 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Mes Notes</h1>
+
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <div class="text-gray-900 dark:text-gray-100">
 
                 @if($notes->count())
                     <div class="overflow-x-auto">
@@ -48,3 +51,4 @@
     </div>
 </div>
 @endsection
+

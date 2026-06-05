@@ -19,6 +19,7 @@ class Apprenant extends Model
         'filiere_id',
         'classe_id',
         'reboublant',
+        'user_id',
     ];
 
     protected $casts = [
@@ -34,6 +35,11 @@ class Apprenant extends Model
     public function classe()
     {
         return $this->belongsTo(Classe::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function notes()

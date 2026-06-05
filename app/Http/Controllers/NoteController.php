@@ -108,23 +108,18 @@ class NoteController extends Controller
             abort(403, 'Seuls les apprenants peuvent consulter leurs notes.');
         }
 
-        $isLinked = false;
+        // Récupérer l'apprenant lié à l'utilisateur par user_id
+        $apprenant = Apprenant::where('user_id', $user->id)->first();
 
-        if (Schema::hasColumn('apprenants', 'user_id')) {
-            $isLinked = true;
-            $notes = Note::whereHas('apprenant', function ($query) use ($user) {
-                $query->where('user_id', $user->id);
-            })->with('matiere')->get();
-        } elseif (Schema::hasColumn('apprenants', 'email')) {
-            $isLinked = true;
-            $notes = Note::whereHas('apprenant', function ($query) use ($user) {
-                $query->where('email', $user->email);
-            })->with('matiere')->get();
-        } else {
-            // No direct apprenant-user link available yet.
-            $notes = collect();
+        if (!$apprenant) {
+            return view('notes.my-notes', ['notes' => collect(), 'apprenant' => null]);
         }
 
-        return view('notes.my-notes', compact('notes', 'isLinked'));
+        $notes = Note::where('apprenant_id', $apprenant->id)
+            ->with('matiere')
+            ->get()
+            ->groupBy('type_evaluation');
+
+        return view('notes.my-notes', compact('notes', 'apprenant'));
     }
 }

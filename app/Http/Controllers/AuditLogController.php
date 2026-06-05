@@ -62,6 +62,7 @@ class AuditLogController extends Controller
      */
     public function export(Request $request)
     {
+        // Limiter l'export à 10000 logs maximum pour éviter les problèmes de mémoire
         $query = AuditLog::with('user');
 
         if ($request->filled('action')) {
@@ -71,7 +72,7 @@ class AuditLogController extends Controller
             $query->byModel($request->model);
         }
 
-        $logs = $query->latest('created_at')->get();
+        $logs = $query->latest('created_at')->limit(10000)->get();
 
         $filename = 'audit_logs_' . now()->format('Y-m-d_H-i-s') . '.csv';
 
