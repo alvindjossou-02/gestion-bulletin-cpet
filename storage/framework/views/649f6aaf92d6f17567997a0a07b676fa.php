@@ -52,6 +52,11 @@
                     </div>
 
                     <div>
+                        <label for="lieu_naissance" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Lieu de naissance</label>
+                        <input id="lieu_naissance" name="lieu_naissance" type="text" value="<?php echo e(old('lieu_naissance')); ?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600">
+                    </div>
+
+                    <div>
                         <label class="inline-flex items-center">
                             <input type="checkbox" name="reboublant" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" <?php echo e(old('reboublant') ? 'checked' : ''); ?>>
                             <span class="ms-2 text-sm text-gray-700 dark:text-gray-300">Reboublant</span>

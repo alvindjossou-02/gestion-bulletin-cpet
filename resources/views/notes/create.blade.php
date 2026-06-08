@@ -50,9 +50,8 @@
                         <label for="type_evaluation" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Type d'Évaluation</label>
                         <select name="type_evaluation" id="type_evaluation" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required>
                             <option value="">-- Sélectionner un type --</option>
-                            @foreach($typeEvaluations as $type)
-                                <option value="{{ $type }}" {{ old('type_evaluation') == $type ? 'selected' : '' }}>{{ $type }}</option>
-                            @endforeach
+                            <option value="Devoir" {{ old('type_evaluation') == 'Devoir' ? 'selected' : '' }}>Devoir</option>
+                            <option value="Interrogation" {{ old('type_evaluation') == 'Interrogation' ? 'selected' : '' }}>Interrogation</option>
                         </select>
                     </div>
 

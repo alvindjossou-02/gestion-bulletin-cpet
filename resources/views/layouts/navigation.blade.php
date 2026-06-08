@@ -13,11 +13,11 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Tableau de Bord') }}
                     </x-nav-link>
 
-                    <!-- Menu ADMINISTRATEUR & DIRECTEUR -->
-                    @if(auth()->user()->hasRole(['administrateur', 'directeur']))
+                    <!-- Menu ADMINISTRATEUR & DIRECTRICE -->
+                    @if(auth()->user()->hasRole(['administrateur', 'directeur', 'directrice']))
                         <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
                             {{ __('Utilisateurs') }}
                         </x-nav-link>
@@ -131,11 +131,11 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Tableau de Bord') }}
             </x-responsive-nav-link>
 
-            <!-- Menu ADMINISTRATEUR & DIRECTEUR (Mobile) -->
-            @if(auth()->user()->hasRole(['administrateur', 'directeur']))
+            <!-- Menu ADMINISTRATEUR & DIRECTRICE (Mobile) -->
+            @if(auth()->user()->hasRole(['administrateur', 'directeur', 'directrice']))
                 <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
                     {{ __('Utilisateurs') }}
                 </x-responsive-nav-link>

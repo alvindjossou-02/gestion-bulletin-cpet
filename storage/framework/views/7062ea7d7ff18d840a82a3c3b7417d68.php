@@ -165,6 +165,8 @@
             font-size: 14px;
             color: var(--color-gray-700);
             margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-gray-200);
         }
 
         .form-checkbox input {
@@ -172,11 +174,13 @@
             height: 16px;
             cursor: pointer;
             accent-color: var(--color-primary);
+            border-radius: 3px;
         }
 
         .form-checkbox label {
             cursor: pointer;
             user-select: none;
+            font-weight: 500;
         }
 
         .form-submit {

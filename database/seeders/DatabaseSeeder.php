@@ -18,6 +18,11 @@ class DatabaseSeeder extends Seeder
             [
                 RolesAndPermissionsSeeder::class,
                 TestUsersSeeder::class,
+                FiliereSeeder::class,
+                ClasseSeeder::class,
+                MatiereSeeder::class,
+                ApprenantSeeder::class,
+                NoteSeeder::class,
             ]
         );
     }

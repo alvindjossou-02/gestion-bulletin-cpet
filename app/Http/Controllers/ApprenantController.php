@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Apprenant;
 use App\Models\Filiere;
 use App\Models\Classe;
+use App\Http\Requests\StoreApprenantRequest;
+use App\Http\Requests\UpdateApprenantRequest;
 use Illuminate\Http\Request;
 
 class ApprenantController extends Controller
@@ -31,18 +33,9 @@ class ApprenantController extends Controller
     /**
      * Stocker un nouvel apprenant
      */
-    public function store(Request $request)
+    public function store(StoreApprenantRequest $request)
     {
-        $validated = $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'matricule' => 'required|string|max:50|unique:apprenants',
-            'sexe' => 'required|in:M,F',
-            'date_naissance' => 'required|date',
-            'filiere_id' => 'required|exists:filieres,id',
-            'classe_id' => 'required|exists:classes,id',
-            'reboublant' => 'sometimes|boolean',
-        ]);
+        $validated = $request->validated();
 
         // Normalize checkbox input (present when checked)
         $validated['reboublant'] = $request->has('reboublant');
@@ -74,18 +67,9 @@ class ApprenantController extends Controller
     /**
      * Mettre à jour un apprenant
      */
-    public function update(Request $request, Apprenant $apprenant)
+    public function update(UpdateApprenantRequest $request, Apprenant $apprenant)
     {
-        $validated = $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'matricule' => 'required|string|max:50|unique:apprenants,matricule,' . $apprenant->id,
-            'sexe' => 'required|in:M,F',
-            'date_naissance' => 'required|date',
-            'filiere_id' => 'required|exists:filieres,id',
-            'classe_id' => 'required|exists:classes,id',
-            'reboublant' => 'sometimes|boolean',
-        ]);
+        $validated = $request->validated();
 
         $validated['reboublant'] = $request->has('reboublant');
 

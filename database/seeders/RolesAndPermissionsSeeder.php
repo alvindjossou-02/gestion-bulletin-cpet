@@ -19,13 +19,15 @@ class RolesAndPermissionsSeeder extends Seeder
         // Définir les permissions selon le tableau
         $permissions = [
             'gerer_utilisateurs',           // Gérer les utilisateurs (Administrateur)
-            'gerer_classes_filieres',       // Gérer les classes/filières (Administrateur, Secrétaire, Directeur)
-            'gerer_apprenants',             // Gérer les apprenants (Administrateur, Secrétaire, Surveillant, Directeur)
-            'saisir_notes',                 // Saisir les notes (Administrateur, Enseignant, Surveillant, Directeur)
-            'enregistrer_absences',         // Enregistrer les absences (Administrateur, Enseignant, Directeur)
+            'gerer_classes_filieres',       // Gérer les classes/filières (Administrateur, Secrétaire, Directrice)
+            'gerer_apprenants',             // Gérer les apprenants (Administrateur, Secrétaire, Surveillant, Directrice)
+            'saisir_notes',                 // Saisir les notes (Administrateur, Enseignant, Surveillant, Directrice)
+            'enregistrer_absences',         // Enregistrer les absences (Administrateur, Enseignant, Directrice)
             'consulter_propres_notes',      // Consulter ses propres notes (Apprenant)
-            'generer_bulletins_pdf',        // Générer les bulletins PDF (Administrateur, Enseignant, Comptable, Surveillant, Directeur)
-            'consulter_statistiques',       // Consulter les statistiques (Administrateur, Secrétaire, Comptable, Surveillant, Directeur)
+            'consulter_notes',              // Consulter les notes des autres (Administrateur, Enseignant, Surveillant, Directrice)
+            'generer_bulletins_pdf',        // Générer les bulletins PDF (Administrateur, Enseignant, Surveillant, Directrice)
+            'consulter_statistiques',       // Consulter les statistiques (Administrateur, Secrétaire, Surveillant, Directrice)
+            'consulter_audit_logs',         // Consulter les logs d'audit (Administrateur, Directrice)
         ];
 
         // Créer les permissions
@@ -41,8 +43,10 @@ class RolesAndPermissionsSeeder extends Seeder
             'gerer_apprenants',
             'saisir_notes',
             'enregistrer_absences',
+            'consulter_notes',
             'generer_bulletins_pdf',
             'consulter_statistiques',
+            'consulter_audit_logs',
         ]);
 
         // 2. ENSEIGNANT
@@ -50,6 +54,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $roleEnseignant->syncPermissions([
             'saisir_notes',
             'enregistrer_absences',
+            'consulter_notes',
             'generer_bulletins_pdf',
         ]);
 
@@ -66,6 +71,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'gerer_apprenants',
             'saisir_notes',
             'enregistrer_absences',
+            'consulter_notes',
             'generer_bulletins_pdf',
             'consulter_statistiques',
         ]);
@@ -73,8 +79,8 @@ class RolesAndPermissionsSeeder extends Seeder
         // 5. COMPTABLE
         $roleComptable = Role::firstOrCreate(['name' => 'comptable'], ['guard_name' => 'web']);
         $roleComptable->syncPermissions([
-            'generer_bulletins_pdf',
             'consulter_statistiques',
+            'consulter_notes',
         ]);
 
         // 6. SURVEILLANT GÉNÉRAL
@@ -83,19 +89,37 @@ class RolesAndPermissionsSeeder extends Seeder
             'gerer_apprenants',
             'saisir_notes',
             'enregistrer_absences',
+            'consulter_notes',
             'generer_bulletins_pdf',
             'consulter_statistiques',
         ]);
 
-        // 7. DIRECTEUR
-        $roleDirecteur = Role::firstOrCreate(['name' => 'directeur'], ['guard_name' => 'web']);
-        $roleDirecteur->syncPermissions([
+        // 7. DIRECTRICE
+        $roleDirectrice = Role::firstOrCreate(['name' => 'directrice'], ['guard_name' => 'web']);
+        $roleDirectrice->syncPermissions([
+            'gerer_utilisateurs',
             'gerer_classes_filieres',
             'gerer_apprenants',
             'saisir_notes',
             'enregistrer_absences',
+            'consulter_notes',
             'generer_bulletins_pdf',
             'consulter_statistiques',
+            'consulter_audit_logs',
+        ]);
+
+        // Keep "directeur" for backwards compatibility, same as "directrice"
+        $roleDirecteur = Role::firstOrCreate(['name' => 'directeur'], ['guard_name' => 'web']);
+        $roleDirecteur->syncPermissions([
+            'gerer_utilisateurs',
+            'gerer_classes_filieres',
+            'gerer_apprenants',
+            'saisir_notes',
+            'enregistrer_absences',
+            'consulter_notes',
+            'generer_bulletins_pdf',
+            'consulter_statistiques',
+            'consulter_audit_logs',
         ]);
 
         $this->command->info('Rôles et permissions créés avec succès!');

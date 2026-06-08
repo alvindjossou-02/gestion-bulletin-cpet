@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\FiliereController;
 use App\Http\Controllers\ClasseController;
@@ -17,9 +18,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -27,8 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// ==================== ROUTES ADMINISTRATEUR & DIRECTEUR ====================
-Route::middleware(['auth', 'verified', 'role:administrateur,directeur'])->prefix('admin')->name('admin.')->group(function () {
+// ==================== ROUTES ADMINISTRATEUR & DIRECTRICE ====================
+Route::middleware(['auth', 'verified', 'role:administrateur,directeur,directrice'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('users', UserRoleController::class);
     Route::post('users/{user}/assign-role', [UserRoleController::class, 'assignRole'])->name('users.assign-role');
     Route::delete('users/{user}/remove-role/{role}', [UserRoleController::class, 'removeRole'])->name('users.remove-role');
@@ -63,7 +62,7 @@ Route::middleware(['auth', 'verified', 'permission:consulter_propres_notes'])->p
 });
 
 // ==================== ROUTES BULLETINS ====================
-Route::middleware(['auth', 'verified', 'permission:generer_bulletins_pdf'])->prefix('bulletins')->name('bulletins.')->group(function () {
+Route::middleware(['auth', 'verified', 'role:administrateur,directeur,directrice,enseignant,surveillant_general'])->prefix('bulletins')->name('bulletins.')->group(function () {
     Route::get('/', [BulletinController::class, 'index'])->name('index');
     Route::get('create', [BulletinController::class, 'create'])->name('create');
     Route::post('/', [BulletinController::class, 'store'])->name('store');
@@ -87,7 +86,7 @@ Route::middleware(['auth', 'verified', 'permission:enregistrer_absences'])->grou
 });
 
 // ==================== ROUTES JOURNAUX D'AUDIT ====================
-Route::middleware(['auth', 'verified', 'role:administrateur,directeur'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:administrateur,directeur,directrice'])->group(function () {
     Route::get('admin/audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
     Route::get('admin/audit-logs/{auditLog}', [AuditLogController::class, 'show'])->name('audit-logs.show');
     Route::get('admin/audit-logs/export', [AuditLogController::class, 'export'])->name('audit-logs.export');

@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Apprenant;
 use App\Models\Matiere;
+use App\Http\Requests\StoreNoteRequest;
+use App\Http\Requests\UpdateNoteRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
 
 class NoteController extends Controller
 {
@@ -26,21 +27,15 @@ class NoteController extends Controller
     {
         $apprenants = Apprenant::all();
         $matieres = Matiere::all();
-        $typeEvaluations = ['Devoir', 'Test', 'Contrôle', 'Examen', 'Travaux Pratiques'];
-        return view('notes.create', compact('apprenants', 'matieres', 'typeEvaluations'));
+        return view('notes.create', compact('apprenants', 'matieres'));
     }
 
     /**
      * Stocker une note
      */
-    public function store(Request $request)
+    public function store(StoreNoteRequest $request)
     {
-        $validated = $request->validate([
-            'apprenant_id' => 'required|exists:apprenants,id',
-            'matiere_id' => 'required|exists:matieres,id',
-            'type_evaluation' => 'required|string|max:50',
-            'note' => 'required|numeric|min:0|max:20',
-        ]);
+        $validated = $request->validated();
 
         Note::create($validated);
 
@@ -64,21 +59,15 @@ class NoteController extends Controller
     {
         $apprenants = Apprenant::all();
         $matieres = Matiere::all();
-        $typeEvaluations = ['Devoir', 'Test', 'Contrôle', 'Examen', 'Travaux Pratiques'];
-        return view('notes.edit', compact('note', 'apprenants', 'matieres', 'typeEvaluations'));
+        return view('notes.edit', compact('note', 'apprenants', 'matieres'));
     }
 
     /**
      * Mettre à jour une note
      */
-    public function update(Request $request, Note $note)
+    public function update(UpdateNoteRequest $request, Note $note)
     {
-        $validated = $request->validate([
-            'apprenant_id' => 'required|exists:apprenants,id',
-            'matiere_id' => 'required|exists:matieres,id',
-            'type_evaluation' => 'required|string|max:50',
-            'note' => 'required|numeric|min:0|max:20',
-        ]);
+        $validated = $request->validated();
 
         $note->update($validated);
 

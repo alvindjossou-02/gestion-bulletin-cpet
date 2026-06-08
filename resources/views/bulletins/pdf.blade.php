@@ -85,7 +85,7 @@
     </div>
 
     <div style="margin-top: 40px; text-align: right;">
-        <p>Signature du Directeur</p>
+        <p>Signature de la Directrice</p>
         <p style="margin-top: 40px;">_________________</p>
         <p>Date: {{ now()->format('d/m/Y') }}</p>
     </div>

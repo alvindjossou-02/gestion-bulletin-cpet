@@ -16,6 +16,7 @@ class Apprenant extends Model
         'matricule',
         'sexe',
         'date_naissance',
+        'lieu_naissance',
         'filiere_id',
         'classe_id',
         'reboublant',

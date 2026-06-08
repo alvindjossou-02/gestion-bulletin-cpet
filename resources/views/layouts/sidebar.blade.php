@@ -35,11 +35,11 @@
                 <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-3m0 0l7-4 7 4M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9m-9 11l4-4m0 0l4 4m-4-4V3"></path>
                 </svg>
-                <span v-show="sidebarOpen" class="font-medium text-sm">{{ __('Dashboard') }}</span>
+                <span v-show="sidebarOpen" class="font-medium text-sm">Tableau de Bord</span>
             </a>
 
-            <!-- Section Administrateur & Directeur -->
-            @if(auth()->user()->hasRole(['administrateur', 'directeur']))
+            <!-- Section Administrateur & Directrice -->
+            @if(auth()->user()->hasRole(['administrateur', 'directeur', 'directrice']))
                 <a href="{{ route('admin.users.index') }}" 
                    class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('admin.users.*') ? 'bg-green-500 dark:bg-green-600 text-white' : 'text-blue-100 hover:bg-blue-700 dark:hover:bg-blue-700' }}"
                    :class="sidebarOpen ? '' : 'justify-center'"

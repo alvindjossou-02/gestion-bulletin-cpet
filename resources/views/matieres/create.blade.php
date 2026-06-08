@@ -42,6 +42,18 @@
                         </select>
                     </div>
 
+                    <div>
+                        <label for="classe_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Classe (optionnel)</label>
+                        <select id="classe_id" name="classe_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600">
+                            <option value="">-- Aucune classe spécifique --</option>
+                            @if(isset($classes))
+                                @foreach($classes as $classe)
+                                    <option value="{{ $classe->id }}" {{ old('classe_id') == $classe->id ? 'selected' : '' }}>{{ $classe->nom_classe }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+
                     <div class="flex gap-4">
                         <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Enregistrer</button>
                         <a href="{{ route('matieres.index') }}" class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">Annuler</a>
