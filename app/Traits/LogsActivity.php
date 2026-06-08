@@ -2,8 +2,7 @@
 
 namespace App\Traits;
 
-use App\Models\AuditLog;
-use Illuminate\Support\Arr;
+use App\Services\AuditService;
 
 trait LogsActivity
 {
@@ -34,26 +33,20 @@ trait LogsActivity
     }
 
     /**
-     * Enregistrer une activité
+     * Enregistrer une activité via AuditService
      */
     public static function logActivity($action, $model, $oldValues, $newValues)
     {
         try {
-            $userId = auth()->id() ?? null;
-
-            AuditLog::create([
-                'user_id' => $userId,
-                'action' => $action,
-                'model' => class_basename($model),
-                'model_id' => $model->id,
-                'old_values' => $oldValues ? Arr::except($oldValues, ['password', 'remember_token']) : null,
-                'new_values' => $newValues ? Arr::except($newValues, ['password', 'remember_token']) : null,
-                'ip_address' => request()->ip() ?? '0.0.0.0',
-                'user_agent' => request()->userAgent() ?? null,
-                'description' => static::getDescription($action, $model),
-            ]);
+            AuditService::logModelAction(
+                $action,
+                class_basename($model),
+                $model->id,
+                $oldValues,
+                $newValues,
+                static::getDescription($action, $model)
+            );
         } catch (\Exception $e) {
-            // Silencieusement ignorer les erreurs de logging pour ne pas bloquer l'appli
             \Log::error('Audit log error: ' . $e->getMessage());
         }
     }
