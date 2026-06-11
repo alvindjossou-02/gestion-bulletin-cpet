@@ -9,21 +9,15 @@
             <div class="p-6 text-gray-900 dark:text-gray-100">
                 <div class="flex justify-between items-center mb-6">
                     <h1 class="text-2xl font-bold">Gestion des Utilisateurs</h1>
-                    <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                    <a href="{{ route('admin.users.create') }}" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
                         Ajouter un utilisateur
                     </a>
                 </div>
 
-                @if(session('success'))
-                    <div class="mb-4 p-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
                 @if($users->count())
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gradient-to-r from-blue-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-600 dark:text-gray-300">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">Nom</th>
                                     <th scope="col" class="px-6 py-3">Email</th>
@@ -39,14 +33,14 @@
                                         <td class="px-6 py-4">
                                             <div class="flex flex-wrap gap-2">
                                                 @forelse($user->roles as $role)
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200">
-                                                        {{ $role->name }}
-                                                        <form method="POST" action="{{ route('admin.users.remove-role', ['user' => $user->id, 'role' => $role->name]) }}" class="inline ml-1">
+                                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
+                                                        <span class="text-sm font-medium">{{ ucfirst(str_replace('_', ' ', $role->name)) }}</span>
+                                                        <form method="POST" action="{{ route('admin.users.remove-role', ['user' => $user->id, 'role' => $role->name]) }}" class="inline" onsubmit="return confirm('Êtes-vous sûr de vouloir retirer ce rôle ?');">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="text-indigo-600 hover:text-indigo-800 ml-1" title="Retirer ce rôle">×</button>
+                                                            <button type="submit" class="text-xs px-2 py-0.5 bg-red-500 hover:bg-red-600 text-white rounded transition">Retirer</button>
                                                         </form>
-                                                    </span>
+                                                    </div>
                                                 @empty
                                                     <span class="text-gray-500 italic">Aucun rôle assigné</span>
                                                 @endforelse
@@ -63,7 +57,7 @@
                                                         @endif
                                                     @endforeach
                                                 </select>
-                                                <button type="submit" class="text-xs px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-700">Assigner</button>
+                                                <button type="submit" class="text-xs px-2 py-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded hover:from-blue-700 hover:to-blue-800 transition">Assigner</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -83,4 +77,36 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* CPET Color Scheme */
+    :root {
+        --cpet-primary: #0052CC;
+        --cpet-dark: #003D99;
+    }
+
+    /* Custom gradient for buttons and headers */
+    .bg-gradient-to-r.from-blue-600.to-blue-700 {
+        background: linear-gradient(135deg, var(--cpet-primary) 0%, var(--cpet-dark) 100%);
+    }
+
+    .hover\:from-blue-700.hover\:to-blue-800:hover {
+        background: linear-gradient(135deg, var(--cpet-dark) 0%, #002366 100%);
+    }
+
+    /* Table header styling */
+    .bg-gradient-to-r.from-blue-50.to-blue-100 {
+        background: linear-gradient(90deg, rgba(0, 82, 204, 0.05) 0%, rgba(0, 61, 153, 0.05) 100%);
+    }
+
+    /* Improve table row hover */
+    tbody tr:hover {
+        background-color: rgba(0, 82, 204, 0.02);
+    }
+
+    /* Button focus styles */
+    button:focus {
+        box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+    }
+</style>
 @endsection

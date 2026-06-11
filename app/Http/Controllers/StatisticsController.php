@@ -128,8 +128,8 @@ class StatisticsController extends Controller
             'apprenants' => $apprenants->map(function($apprenant) {
                 return [
                     'nom_complet' => $apprenant->nom . ' ' . $apprenant->prenom,
-                    'moyenne' => $apprenant->bulletins->avg('moyenne_generale') ?? 0,
-                    'rang' => $apprenant->bulletins->first()?->rang ?? 'N/A',
+                    'moyenne' => $apprenant->bulletins?->avg('moyenne_generale') ?? 0,
+                    'rang' => $apprenant->bulletins?->first()?->rang ?? 'N/A',
                 ];
             })->sortByDesc('moyenne'),
         ];
@@ -153,8 +153,8 @@ class StatisticsController extends Controller
             'apprenants' => $apprenants->map(function($apprenant) {
                 return [
                     'nom_complet' => $apprenant->nom . ' ' . $apprenant->prenom,
-                    'classe' => $apprenant->classe->nom_classe,
-                    'moyenne' => $apprenant->bulletins->avg('moyenne_generale') ?? 0,
+                    'classe' => $apprenant->classe?->nom_classe ?? 'N/A',
+                    'moyenne' => $apprenant->bulletins?->avg('moyenne_generale') ?? 0,
                 ];
             })->sortByDesc('moyenne'),
         ];

@@ -103,7 +103,7 @@ class AuditLogController extends Controller
                     $log->ip_address,
                     substr($log->user_agent ?? '', 0, 50),
                     $log->description,
-                    $log->created_at->format('Y-m-d H:i:s'),
+                    $log->created_at ? $log->created_at->format('Y-m-d H:i:s') : 'N/A',
                 ]);
             }
 

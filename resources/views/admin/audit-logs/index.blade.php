@@ -76,7 +76,7 @@
                     @foreach($logs as $log)
                         <tr class="log-row log-{{ $log->action }}">
                             <td class="text-muted">
-                                {{ $log->created_at->format('d/m/Y H:i:s') }}
+                                {{ $log->created_at ? $log->created_at->format('d/m/Y H:i:s') : 'N/A' }}
                             </td>
                             <td>
                                 @if($log->user)

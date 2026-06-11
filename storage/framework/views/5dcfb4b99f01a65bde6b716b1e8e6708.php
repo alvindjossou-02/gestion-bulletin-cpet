@@ -1,0 +1,5 @@
+<button <?php echo e($attributes->merge(['type' => 'submit', 'class' => 'inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:from-blue-700 hover:to-blue-800 focus:from-blue-700 focus:to-blue-800 active:from-blue-800 active:to-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'])); ?>>
+    <?php echo e($slot); ?>
+
+</button>
+<?php /**PATH C:\xampp\htdocs\gestion-bulletin-cpet\resources\views/components/primary-button.blade.php ENDPATH**/ ?>

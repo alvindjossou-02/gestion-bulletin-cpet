@@ -133,8 +133,8 @@
             <div class="logo-container">
                 <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo">
             </div>
-            <h1>S'inscrire</h1>
-            <p class="subtitle">Créez votre compte pour accéder au système</p>
+            <h1>Créer un compte apprenant</h1>
+            <p class="subtitle">Inscrivez-vous pour accéder à vos notes et bulletins</p>
         </div>
 
         <form method="POST" action="{{ route('register') }}">
@@ -180,11 +180,9 @@
             <div class="form-group">
                 <label for="role">Rôle</label>
                 <select id="role" name="role" required>
-                    <option value="">-- Sélectionnez votre rôle --</option>
-                    <option value="apprenant" {{ old('role') === 'apprenant' ? 'selected' : '' }}>Apprenant</option>
-                    <option value="enseignant" {{ old('role') === 'enseignant' ? 'selected' : '' }}>Enseignant</option>
+                    <option value="apprenant" {{ old('role', 'apprenant') === 'apprenant' ? 'selected' : '' }}>Apprenant</option>
                 </select>
-                <p class="helper-text">Les autres rôles seront assignés par l'administrateur.</p>
+                <p class="helper-text">Vous vous inscrivez en tant qu'apprenant.</p>
                 @if ($errors->has('role'))
                     <div class="error">{{ $errors->first('role') }}</div>
                 @endif

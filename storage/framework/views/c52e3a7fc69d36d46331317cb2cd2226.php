@@ -9,13 +9,6 @@
         <a href="<?php echo e(route('apprenants.create')); ?>" style="display: inline-flex; align-items: center; padding: 10px 20px; background: linear-gradient(135deg, #0052CC 0%, #003D99 100%); color: white; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 8px 20px rgba(0, 82, 204, 0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow=''; this.style.transform=''">➕ Ajouter un apprenant</a>
     </div>
 
-    <?php if(session('success')): ?>
-        <div style="margin-bottom: 20px; padding: 12px 16px; background-color: #ECFDF5; color: #065F46; border: 1px solid #D1FAE5; border-radius: 8px; font-size: 14px;">
-            <?php echo e(session('success')); ?>
-
-        </div>
-    <?php endif; ?>
-
     <?php if($apprenants->count()): ?>
         <div style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); overflow: hidden;">
             <table style="width: 100%; border-collapse: collapse; font-size: 14px;">

@@ -31,6 +31,27 @@
             </div>
         </div>
 
+        <!-- Graphiques Chart.js -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <!-- Distribution des notes (Pie Chart) -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+                <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Distribution des Notes</h2>
+                <canvas id="notesDistributionChart" style="max-height: 300px;"></canvas>
+            </div>
+
+            <!-- Apprenants par Filière (Doughnut Chart) -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+                <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Apprenants par Filière</h2>
+                <canvas id="apprenantsByFiliereChart" style="max-height: 300px;"></canvas>
+            </div>
+
+            <!-- Apprenants par Classe (Bar Chart) -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow md:col-span-2">
+                <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Apprenants par Classe</h2>
+                <canvas id="apprenantsByClasseChart" style="max-height: 300px;"></canvas>
+            </div>
+        </div>
+
         <!-- Meilleurs apprenants -->
         <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-8">
             <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Top 10 Apprenants</h2>
@@ -142,4 +163,155 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Colors for charts
+    const colors = {
+        primary: '#0052CC',
+        green: '#10B981',
+        red: '#EF4444',
+        yellow: '#F59E0B',
+        blue: '#3B82F6',
+        purple: '#A855F7',
+        pink: '#EC4899',
+        indigo: '#6366F1'
+    };
+
+    // Notes Distribution Chart (Pie)
+    @if($notesDistribution)
+    const notesCtx = document.getElementById('notesDistributionChart').getContext('2d');
+    new Chart(notesCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Excellent (18-20)', 'Très Bon (16-17)', 'Bon (14-15)', 'Acceptable (12-13)', 'Passable (10-11)', 'Faible (<10)'],
+            datasets: [{
+                label: 'Distribution des Notes',
+                data: [
+                    {{ $notesDistribution['excellent'] }},
+                    {{ $notesDistribution['tres_bon'] }},
+                    {{ $notesDistribution['bon'] }},
+                    {{ $notesDistribution['acceptable'] }},
+                    {{ $notesDistribution['passable'] }},
+                    {{ $notesDistribution['faible'] }}
+                ],
+                backgroundColor: [
+                    '#10B981',
+                    '#3B82F6',
+                    '#6366F1',
+                    '#F59E0B',
+                    '#F97316',
+                    '#EF4444'
+                ],
+                borderColor: 'white',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { padding: 20, font: { size: 12 } }
+                }
+            }
+        }
+    });
+    @endif
+
+    // Apprenants par Filière Chart (Doughnut)
+    @php
+    $filieresCount = \App\Models\Filiere::withCount('apprenants')->get();
+    @endphp
+    @if($filieresCount->count() > 0)
+    const filiereCtx = document.getElementById('apprenantsByFiliereChart').getContext('2d');
+    new Chart(filiereCtx, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                @foreach($filieresCount as $f)
+                    '{{ $f->nom }}',
+                @endforeach
+            ],
+            datasets: [{
+                label: 'Apprenants par Filière',
+                data: [
+                    @foreach($filieresCount as $f)
+                        {{ $f->apprenants_count }},
+                    @endforeach
+                ],
+                backgroundColor: [
+                    colors.primary,
+                    colors.green,
+                    colors.purple,
+                    colors.pink,
+                    colors.indigo,
+                    colors.blue,
+                    colors.yellow,
+                    colors.red
+                ],
+                borderColor: 'white',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { padding: 20, font: { size: 12 } }
+                }
+            }
+        }
+    });
+    @endif
+
+    // Apprenants par Classe Chart (Bar)
+    @php
+    $classesCount = \App\Models\Classe::withCount('apprenants')->get();
+    @endphp
+    @if($classesCount->count() > 0)
+    const classeCtx = document.getElementById('apprenantsByClasseChart').getContext('2d');
+    new Chart(classeCtx, {
+        type: 'bar',
+        data: {
+            labels: [
+                @foreach($classesCount as $c)
+                    '{{ $c->nom }}',
+                @endforeach
+            ],
+            datasets: [{
+                label: 'Nombre d\'Apprenants',
+                data: [
+                    @foreach($classesCount as $c)
+                        {{ $c->apprenants_count }},
+                    @endforeach
+                ],
+                backgroundColor: colors.primary,
+                borderColor: colors.primary,
+                borderWidth: 1,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            indexAxis: 'x',
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: { padding: 20, font: { size: 12 } }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { stepSize: 1 }
+                }
+            }
+        }
+    });
+    @endif
+</script>
 @endsection

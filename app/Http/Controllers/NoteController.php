@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Apprenant;
 use App\Models\Matiere;
+use App\Models\Filiere;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\UpdateNoteRequest;
 use Illuminate\Http\Request;
@@ -27,7 +28,12 @@ class NoteController extends Controller
     {
         $apprenants = Apprenant::all();
         $matieres = Matiere::all();
-        return view('notes.create', compact('apprenants', 'matieres'));
+        $filieres = Filiere::all();
+        
+        // Charger les apprenants avec les classes pour les filtres en cascade
+        $apprenants = Apprenant::with('classe')->get();
+        
+        return view('notes.create', compact('apprenants', 'matieres', 'filieres'));
     }
 
     /**

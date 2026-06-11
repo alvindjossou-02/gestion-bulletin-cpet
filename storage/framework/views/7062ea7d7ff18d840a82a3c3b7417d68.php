@@ -46,8 +46,8 @@
 
         .login-container {
             width: 100%;
-            max-width: 420px;
-            padding: 20px;
+            max-width: 380px;
+            padding: 16px;
         }
 
         .login-card {
@@ -59,14 +59,14 @@
 
         .login-header {
             background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
-            padding: 40px 24px;
+            padding: 32px 24px;
             text-align: center;
         }
 
         .login-logo {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 16px;
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 12px;
             border-radius: 8px;
             object-fit: cover;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -74,54 +74,62 @@
 
         .login-title {
             color: white;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .login-subtitle {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .login-body {
-            padding: 32px 24px;
+            padding: 28px 24px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .form-label {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: var(--color-gray-700);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .form-input,
         .form-input-wrapper {
             display: block;
             width: 100%;
-            padding: 10px 14px;
+            padding: 11px 14px;
             font-size: 14px;
-            border: 1px solid var(--color-gray-300);
-            border-radius: 8px;
+            border: 1.5px solid var(--color-gray-300);
+            border-radius: 6px;
             transition: all 0.3s ease;
+            background: white;
         }
 
         .form-input-wrapper {
             display: flex;
             align-items: center;
             padding: 0;
-            border: 1px solid var(--color-gray-300);
+            border: 1.5px solid var(--color-gray-300);
         }
 
         .form-input {
             border: none;
-            padding: 10px 14px;
+            padding: 11px 14px;
             flex: 1;
+            background: transparent;
+        }
+
+        .form-input::placeholder {
+            color: var(--color-gray-300);
         }
 
         .form-input:focus,
@@ -129,6 +137,7 @@
             outline: none;
             border-color: var(--color-primary);
             box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+            background: white;
         }
 
         .password-toggle {
@@ -164,9 +173,8 @@
             gap: 8px;
             font-size: 14px;
             color: var(--color-gray-700);
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--color-gray-200);
+            margin-bottom: 20px;
+            margin-top: 12px;
         }
 
         .form-checkbox input {
@@ -183,18 +191,41 @@
             font-weight: 500;
         }
 
+        .form-links-container {
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .form-links-left,
+        .form-links-right {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-links-left {
+            flex: 1;
+        }
+
+        .form-links-right {
+            flex: 1;
+            justify-content: flex-end;
+        }
+
         .form-submit {
             width: 100%;
-            padding: 12px;
+            padding: 11px;
             font-size: 14px;
             font-weight: 600;
             color: white;
             background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .form-submit:hover {
@@ -207,24 +238,23 @@
         }
 
         .form-link {
-            display: block;
-            text-align: center;
-            font-size: 14px;
+            display: inline-block;
+            font-size: 13px;
             color: var(--color-primary);
             text-decoration: none;
             transition: color 0.3s ease;
-            margin-bottom: 8px;
         }
 
         .form-link:hover {
             color: var(--color-primary-dark);
+            text-decoration: underline;
         }
 
         .login-footer {
-            padding: 20px 24px;
+            padding: 16px 24px;
             background: var(--color-gray-50);
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--color-gray-600);
             border-top: 1px solid var(--color-gray-200);
         }
@@ -240,10 +270,10 @@
         }
 
         .alert {
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            margin-bottom: 20px;
+            padding: 11px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 16px;
         }
 
         .alert-error {
@@ -254,15 +284,30 @@
 
         @media (max-width: 480px) {
             .login-container {
-                padding: 10px;
+                padding: 8px;
+                max-width: 100%;
             }
 
             .login-body {
-                padding: 24px 16px;
+                padding: 20px 12px;
             }
 
             .login-header {
-                padding: 30px 16px;
+                padding: 24px 12px;
+            }
+
+            .login-logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .login-title {
+                font-size: 20px;
+            }
+
+            .form-submit {
+                padding: 10px 16px;
+                font-size: 13px;
             }
         }
     </style>
@@ -354,12 +399,18 @@ unset($__errorArgs, $__bag); ?>
                     <button type="submit" class="form-submit">Connexion</button>
 
                     <!-- Footer Links -->
-                    <?php if(Route::has('password.request')): ?>
-                        <a href="<?php echo e(route('password.request')); ?>" class="form-link">Mot de passe oublié ?</a>
-                    <?php endif; ?>
-                    <?php if(Route::has('register')): ?>
-                        <a href="<?php echo e(route('register')); ?>" class="form-link">Créer un compte</a>
-                    <?php endif; ?>
+                    <div class="form-links-container">
+                        <div class="form-links-left">
+                            <?php if(Route::has('password.request')): ?>
+                                <a href="<?php echo e(route('password.request')); ?>" class="form-link">Mot de passe oublié ?</a>
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-links-right">
+                            <?php if(Route::has('register')): ?>
+                                <a href="<?php echo e(route('register')); ?>" class="form-link">Créer un compte</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </form>
             </div>
 

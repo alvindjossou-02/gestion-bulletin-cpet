@@ -70,7 +70,7 @@
 
                 <div class="detail-item">
                     <label>Date/Heure</label>
-                    <p>{{ $log->created_at->format('d/m/Y H:i:s') }}</p>
+                    <p>{{ $log->created_at ? $log->created_at->format('d/m/Y H:i:s') : 'N/A' }}</p>
                 </div>
             </div>
         </div>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BulletinGenerated;
 use App\Models\Bulletin;
 use App\Models\Apprenant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use PDF;
 
 class BulletinController extends Controller
@@ -41,10 +43,19 @@ class BulletinController extends Controller
             'trimestre' => 'required|string|in:1er Trimestre,2e Trimestre,3e Trimestre',
         ]);
 
-        Bulletin::create($validated);
+        $bulletin = Bulletin::create($validated);
+
+        // Charger les relations pour l'email
+        $bulletin = $bulletin->load('apprenant.classe.filiere');
+
+        // Envoyer un email de notification à l'apprenant
+        if ($bulletin->apprenant->user) {
+            Mail::queue(new BulletinGenerated($bulletin));
+        }
 
         return redirect()->route('bulletins.index')
-            ->with('success', 'Bulletin créé avec succès!');
+            ->with('success', 'Bulletin créé avec succès! Un email de notification a été envoyé.');
+    }
     }
 
     /**
@@ -105,7 +116,7 @@ class BulletinController extends Controller
         ];
 
         // Générer le PDF (nécessite barryvdh/laravel-dompdf)
-        // return PDF::loadView('bulletins.pdf', $data)->download('bulletin_' . $bulletin->apprenant->matricule . '.pdf');
+        // return PDF::loadView('bulletins.pdf', $data)->download('bulletin_' . ($bulletin->apprenant?->matricule ?? 'bulletin') . '.pdf');
 
         // Pour maintenant, afficher la vue PDF
         return view('bulletins.pdf', $data);

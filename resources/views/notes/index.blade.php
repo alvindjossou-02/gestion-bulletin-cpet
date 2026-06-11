@@ -14,12 +14,6 @@
                     </a>
                 </div>
 
-                @if(session('success'))
-                    <div class="mb-4 p-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
                 @if($notes->count())
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

@@ -14,6 +14,9 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
     <style>
         :root {
             --color-primary: #0052CC;
@@ -364,7 +367,7 @@
         .content-area {
             flex: 1;
             overflow-y: auto;
-            padding: 32px;
+            padding: 16px 32px;
             background: white !important;
             display: flex;
             flex-direction: column;
@@ -463,6 +466,120 @@
             color: var(--color-primary);
         }
 
+        /* CONTENT SECTIONS */
+        .content-area > div:first-child {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .content-area .py-12 {
+            padding-top: 12px !important;
+            padding-bottom: 12px !important;
+        }
+
+        /* TOAST NOTIFICATIONS */
+        .toast-container {
+            position: fixed;
+            top: 90px;
+            right: 32px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 400px;
+        }
+
+        .toast {
+            background: white;
+            border-left: 4px solid #10B981;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideIn 0.3s ease-out;
+            min-height: 56px;
+        }
+
+        .toast.success {
+            border-left-color: #10B981;
+            background: #F0FDF4;
+        }
+
+        .toast.error {
+            border-left-color: #EF4444;
+            background: #FEF2F2;
+        }
+
+        .toast.info {
+            border-left-color: #3B82F6;
+            background: #EFF6FF;
+        }
+
+        .toast-icon {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .toast.success .toast-icon {
+            color: #10B981;
+        }
+
+        .toast.error .toast-icon {
+            color: #EF4444;
+        }
+
+        .toast.info .toast-icon {
+            color: #3B82F6;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            color: var(--color-gray-700);
+            flex: 1;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-gray-400);
+            font-size: 20px;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .toast-close:hover {
+            color: var(--color-gray-600);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        .toast.removing {
+            animation: slideOut 0.3s ease-out;
+        }
+
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .sidebar {
@@ -524,6 +641,33 @@
 
         .content-area::-webkit-scrollbar-thumb:hover {
             background: var(--color-gray-400);
+        }
+
+        /* CHECKBOX STYLING */
+        input[type="checkbox"] {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #10b981 !important;
+            border-color: #059669 !important;
+            accent-color: #10b981;
+        }
+
+        input[type="checkbox"]:focus {
+            outline: 2px solid #10b981;
+            outline-offset: 2px;
+        }
+
+        /* Label styling for checkboxes */
+        label:has(> input[type="checkbox"]:checked) {
+            color: #10b981 !important;
+            font-weight: 500;
+        }
+
+        label:has(> input[type="checkbox"]:checked) span {
+            color: #10b981 !important;
         }
     </style>
 </head>
@@ -668,37 +812,15 @@
                 </div>
             </div>
 
-            <!-- Alerts -->
-            @if(session('success'))
-                <div class="content-wrapper mb-4">
-                    <div class="mb-4 p-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">
-                        {{ session('success') }}
-                    </div>
-                </div>
-            @endif
-
-            @if(session('error'))
-                <div class="content-wrapper mb-4">
-                    <div class="mb-4 p-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
-                        {{ session('error') }}
-                    </div>
-                </div>
-            @endif
-
-            @if(session('status'))
-                <div class="content-wrapper mb-4">
-                    <div class="mb-4 p-4 text-sm text-indigo-800 rounded-lg bg-indigo-50 dark:bg-gray-800 dark:text-indigo-300">
-                        {{ session('status') }}
-                    </div>
-                </div>
-            @endif
-
-            <!-- CONTENT -->
+            <!-- CONTENT AREA WITH SCROLLABLE CONTENT -->
             <div class="content-area">
+                <!-- Alerts -->
+                <!-- TOAST NOTIFICATIONS -->
+                @include('components.toast-notifications')
+                
                 <div class="content-wrapper">
                     @yield('content')
                 </div>
-
 
                 <!-- FOOTER -->
                 <footer class="page-footer">
@@ -779,8 +901,8 @@
                         </div>
                     </div>
                 </footer>
-            </div>
-        </div>
+            </div> <!-- Fermeture de .content-area -->
+        </div> <!-- Fermeture de .main-content -->
     </div>
 
     <script>

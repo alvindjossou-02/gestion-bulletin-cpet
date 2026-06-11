@@ -48,24 +48,40 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                     <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">Gestion</h3>
-                    <ul class="space-y-2">
-                        <li><a href="{{ route('apprenants.index') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Gérer Apprenants</a></li>
-                        <li><a href="{{ route('classes.index') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Gérer Classes</a></li>
-                        <li><a href="{{ route('filieres.index') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Gérer Filières</a></li>
-                        <li><a href="{{ route('matieres.index') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Gérer Matières</a></li>
-                    </ul>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="{{ route('apprenants.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition duration-150">
+                            <span>👥 Apprenants</span>
+                        </a>
+                        <a href="{{ route('classes.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition duration-150">
+                            <span>📚 Classes</span>
+                        </a>
+                        <a href="{{ route('filieres.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition duration-150">
+                            <span>🎓 Filières</span>
+                        </a>
+                        <a href="{{ route('matieres.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition duration-150">
+                            <span>📖 Matières</span>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                     <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">Opérations</h3>
-                    <ul class="space-y-2">
-                        <li><a href="{{ route('notes.index') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Saisir Notes</a></li>
-                        <li><a href="{{ route('bulletins.index') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Génération Bulletins</a></li>
-                        <li><a href="{{ route('statistics.index') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Statistiques</a></li>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="{{ route('notes.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:from-green-700 hover:to-green-800 transition duration-150">
+                            <span>✏️ Notes</span>
+                        </a>
+                        <a href="{{ route('bulletins.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-purple-800 transition duration-150">
+                            <span>📄 Bulletins</span>
+                        </a>
+                        <a href="{{ route('statistics.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-orange-600 to-orange-700 text-white font-semibold rounded-lg hover:from-orange-700 hover:to-orange-800 transition duration-150">
+                            <span>📊 Stats</span>
+                        </a>
                         @if(auth()->user()->hasRole(['administrateur']))
-                            <li><a href="{{ route('audit.logs') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Journaux d'Audit</a></li>
+                            <a href="{{ route('audit-logs.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg hover:from-red-700 hover:to-red-800 transition duration-150">
+                                <span>🔍 Audit</span>
+                            </a>
                         @endif
-                    </ul>
+                    </div>
                 </div>
             </div>
 
@@ -96,12 +112,20 @@
 
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">Mes Actions</h3>
-                <ul class="space-y-2">
-                    <li><a href="{{ route('notes.index') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Saisir Notes</a></li>
-                    <li><a href="{{ route('absences.index') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Enregistrer Absences</a></li>
-                    <li><a href="{{ route('bulletins.index') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Consulter Bulletins</a></li>
-                    <li><a href="{{ route('statistics.index') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Statistiques</a></li>
-                </ul>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <a href="{{ route('notes.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:from-green-700 hover:to-green-800 transition duration-150">
+                        <span>✏️ Saisir Notes</span>
+                    </a>
+                    <a href="{{ route('absences.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-orange-600 to-orange-700 text-white font-semibold rounded-lg hover:from-orange-700 hover:to-orange-800 transition duration-150">
+                        <span>📋 Absences</span>
+                    </a>
+                    <a href="{{ route('bulletins.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-purple-800 transition duration-150">
+                        <span>📄 Bulletins</span>
+                    </a>
+                    <a href="{{ route('statistics.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition duration-150">
+                        <span>📊 Stats</span>
+                    </a>
+                </div>
             </div>
 
         {{-- Apprenant Dashboard --}}
@@ -148,10 +172,114 @@
 
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">Mes Actions</h3>
-                <ul class="space-y-2">
-                    <li><a href="{{ route('notes.my-notes') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Mes Notes</a></li>
-                    <li><a href="{{ route('bulletins.index') }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">→ Mes Bulletins</a></li>
-                </ul>
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="{{ route('my-notes.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition duration-150">
+                        <span>📝 Mes Notes</span>
+                    </a>
+                    <a href="{{ route('bulletins.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-purple-800 transition duration-150">
+                        <span>📄 Bulletins</span>
+                    </a>
+                </div>
+            </div>
+
+        {{-- Secrétaire Dashboard --}}
+        @elseif(auth()->user()->hasRole('secretaire'))
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Apprenants</p>
+                        <p class="text-3xl font-bold text-blue-600">{{ \App\Models\Apprenant::count() }}</p>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Classes</p>
+                        <p class="text-3xl font-bold text-green-600">{{ \App\Models\Classe::count() }}</p>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Absences</p>
+                        <p class="text-3xl font-bold text-orange-600">{{ \App\Models\Absence::count() }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">Mes Actions</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="{{ route('apprenants.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition duration-150">
+                        <span>👥 Apprenants</span>
+                    </a>
+                    <a href="{{ route('absences.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:from-green-700 hover:to-green-800 transition duration-150">
+                        <span>📋 Absences</span>
+                    </a>
+                    <a href="{{ route('classes.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-purple-800 transition duration-150">
+                        <span>📚 Classes</span>
+                    </a>
+                    <a href="{{ route('statistics.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-orange-600 to-orange-700 text-white font-semibold rounded-lg hover:from-orange-700 hover:to-orange-800 transition duration-150">
+                        <span>📊 Statistiques</span>
+                    </a>
+                </div>
+            </div>
+
+        {{-- Comptable Dashboard --}}
+        @elseif(auth()->user()->hasRole('comptable'))
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">Mes Actions</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="{{ route('apprenants.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition duration-150">
+                        <span>👥 Apprenants</span>
+                    </a>
+                    <a href="{{ route('statistics.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-purple-800 transition duration-150">
+                        <span>📊 Statistiques</span>
+                    </a>
+                </div>
+            </div>
+
+        {{-- Surveillant Général Dashboard --}}
+        @elseif(auth()->user()->hasRole('surveillant_general'))
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Total Absences</p>
+                        <p class="text-3xl font-bold text-red-600">{{ \App\Models\Absence::count() }}</p>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Apprenants</p>
+                        <p class="text-3xl font-bold text-blue-600">{{ \App\Models\Apprenant::count() }}</p>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Classes</p>
+                        <p class="text-3xl font-bold text-green-600">{{ \App\Models\Classe::count() }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">Mes Actions</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="{{ route('absences.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg hover:from-red-700 hover:to-red-800 transition duration-150">
+                        <span>📋 Absences</span>
+                    </a>
+                    <a href="{{ route('apprenants.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition duration-150">
+                        <span>👥 Apprenants</span>
+                    </a>
+                    <a href="{{ route('classes.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:from-green-700 hover:to-green-800 transition duration-150">
+                        <span>📚 Classes</span>
+                    </a>
+                    <a href="{{ route('statistics.index') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-purple-800 transition duration-150">
+                        <span>📊 Statistiques</span>
+                    </a>
+                </div>
             </div>
 
         {{-- Other Roles --}}

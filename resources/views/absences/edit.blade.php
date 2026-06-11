@@ -37,7 +37,7 @@
 
                     <div>
                         <label for="date_absence" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Date d'absence</label>
-                        <input type="date" name="date_absence" id="date_absence" value="{{ old('date_absence', $absence->date_absence->format('Y-m-d')) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required>
+                        <input type="date" name="date_absence" id="date_absence" value="{{ old('date_absence', $absence->date_absence ? $absence->date_absence->format('Y-m-d') : '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required>
                     </div>
 
                     <div>

@@ -55,7 +55,7 @@ class AuditService
                 'method' => 'POST',
                 'route' => 'login',
                 'url' => request()->url() ?? null,
-                'description' => auth()->user()->name . ' s\'est connecté',
+                'description' => (auth()->user()?->name ?? 'Utilisateur inconnu') . ' s\'est connecté',
                 'severity' => 'info',
                 'response_status' => 200,
             ]);
