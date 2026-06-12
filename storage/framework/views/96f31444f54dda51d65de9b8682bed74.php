@@ -12,12 +12,6 @@
                     <a href="<?php echo e(route('matieres.create')); ?>" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Ajouter une matière</a>
                 </div>
 
-                <?php if(session('success')): ?>
-                    <div class="mb-4 p-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-green-900 dark:text-green-200">
-                        <?php echo e(session('success')); ?>
-
-                    </div>
-                <?php endif; ?>
 
                 <?php if($matieres->count()): ?>
                     <div class="overflow-x-auto">

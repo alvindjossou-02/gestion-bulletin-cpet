@@ -5,12 +5,12 @@
 @section('content')
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900">
                 <h1 class="text-2xl font-bold mb-6">Modifier une absence</h1>
 
                 @if($errors->any())
-                    <div class="mb-4 p-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+                    <div class="mb-4 p-4 text-sm text-red-800 rounded-lg bg-red-50">
                         <ul>
                             @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -24,8 +24,8 @@
                     @method('PATCH')
 
                     <div>
-                        <label for="apprenant_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Apprenant</label>
-                        <select name="apprenant_id" id="apprenant_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required>
+                        <label for="apprenant_id" class="block text-sm font-medium text-gray-700">Apprenant</label>
+                        <select name="apprenant_id" id="apprenant_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900" required>
                             <option value="">-- Sélectionner un apprenant --</option>
                             @foreach($apprenants as $apprenant)
                                 <option value="{{ $apprenant->id }}" {{ old('apprenant_id', $absence->apprenant_id) == $apprenant->id ? 'selected' : '' }}>
@@ -36,20 +36,20 @@
                     </div>
 
                     <div>
-                        <label for="date_absence" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Date d'absence</label>
-                        <input type="date" name="date_absence" id="date_absence" value="{{ old('date_absence', $absence->date_absence ? $absence->date_absence->format('Y-m-d') : '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required>
+                        <label for="date_absence" class="block text-sm font-medium text-gray-700">Date d'absence</label>
+                        <input type="date" name="date_absence" id="date_absence" value="{{ old('date_absence', $absence->date_absence ? $absence->date_absence->format('Y-m-d') : '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900" required>
                     </div>
 
                     <div>
                         <label class="inline-flex items-center">
                             <input type="checkbox" name="justifiee" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ old('justifiee', $absence->justifiee) ? 'checked' : '' }}>
-                            <span class="ms-2 text-sm text-gray-700 dark:text-gray-300">Justifiée</span>
+                            <span class="ms-2 text-sm text-gray-700">Justifiée</span>
                         </label>
                     </div>
 
                     <div>
-                        <label for="motif" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Motif (optionnel)</label>
-                        <input type="text" name="motif" id="motif" value="{{ old('motif', $absence->motif) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600">
+                        <label for="motif" class="block text-sm font-medium text-gray-700">Motif (optionnel)</label>
+                        <input type="text" name="motif" id="motif" value="{{ old('motif', $absence->motif) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900">
                     </div>
 
                     <div class="flex gap-4">

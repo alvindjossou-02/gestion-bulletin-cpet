@@ -5,12 +5,12 @@
 @section('content')
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900">
                 <h1 class="text-2xl font-bold mb-6">Modifier le Bulletin</h1>
 
                 @if($errors->any())
-                    <div class="mb-4 p-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+                    <div class="mb-4 p-4 text-sm text-red-800 rounded-lg bg-red-50">
                         <ul>
                             @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -24,8 +24,8 @@
                     @method('PATCH')
 
                     <div>
-                        <label for="apprenant_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Apprenant</label>
-                        <select name="apprenant_id" id="apprenant_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required>
+                        <label for="apprenant_id" class="block text-sm font-medium text-gray-700">Apprenant</label>
+                        <select name="apprenant_id" id="apprenant_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900" required>
                             @foreach($apprenants as $apprenant)
                                 <option value="{{ $apprenant->id }}" {{ $bulletin->apprenant_id == $apprenant->id ? 'selected' : '' }}>
                                     {{ $apprenant->nom }} {{ $apprenant->prenom }}
@@ -35,8 +35,8 @@
                     </div>
 
                     <div>
-                        <label for="trimestre" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Trimestre</label>
-                        <select name="trimestre" id="trimestre" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required>
+                        <label for="trimestre" class="block text-sm font-medium text-gray-700">Trimestre</label>
+                        <select name="trimestre" id="trimestre" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900" required>
                             @foreach($trimestres as $trimestre)
                                 <option value="{{ $trimestre }}" {{ $bulletin->trimestre == $trimestre ? 'selected' : '' }}>{{ $trimestre }}</option>
                             @endforeach
@@ -44,18 +44,18 @@
                     </div>
 
                     <div>
-                        <label for="moyenne_generale" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Moyenne Générale (0-20)</label>
-                        <input type="number" name="moyenne_generale" id="moyenne_generale" min="0" max="20" step="0.5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required value="{{ $bulletin->moyenne_generale }}">
+                        <label for="moyenne_generale" class="block text-sm font-medium text-gray-700">Moyenne Générale (0-20)</label>
+                        <input type="number" name="moyenne_generale" id="moyenne_generale" min="0" max="20" step="0.5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900" required value="{{ $bulletin->moyenne_generale }}">
                     </div>
 
                     <div>
-                        <label for="rang" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Rang</label>
-                        <input type="number" name="rang" id="rang" min="1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required value="{{ $bulletin->rang }}">
+                        <label for="rang" class="block text-sm font-medium text-gray-700">Rang</label>
+                        <input type="number" name="rang" id="rang" min="1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900" required value="{{ $bulletin->rang }}">
                     </div>
 
                     <div>
-                        <label for="appreciation" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Appréciation</label>
-                        <textarea name="appreciation" id="appreciation" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600">{{ $bulletin->appreciation }}</textarea>
+                        <label for="appreciation" class="block text-sm font-medium text-gray-700">Appréciation</label>
+                        <textarea name="appreciation" id="appreciation" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900">{{ $bulletin->appreciation }}</textarea>
                     </div>
 
                     <div class="flex gap-4">

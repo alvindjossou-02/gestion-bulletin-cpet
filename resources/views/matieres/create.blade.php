@@ -5,12 +5,12 @@
 @section('content')
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900">
                 <h1 class="text-2xl font-bold mb-6">Ajouter une matière</h1>
 
                 @if($errors->any())
-                    <div class="mb-4 p-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+                    <div class="mb-4 p-4 text-sm text-red-800 rounded-lg bg-red-50">
                         <ul>
                             @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -23,18 +23,18 @@
                     @csrf
 
                     <div>
-                        <label for="nom_matiere" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nom de la matière</label>
-                        <input id="nom_matiere" name="nom_matiere" type="text" value="{{ old('nom_matiere') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required>
+                        <label for="nom_matiere" class="block text-sm font-medium text-gray-700">Nom de la matière</label>
+                        <input id="nom_matiere" name="nom_matiere" type="text" value="{{ old('nom_matiere') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900" required>
                     </div>
 
                     <div>
-                        <label for="coefficient" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Coefficient</label>
-                        <input id="coefficient" name="coefficient" type="number" min="1" max="10" value="{{ old('coefficient') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required>
+                        <label for="coefficient" class="block text-sm font-medium text-gray-700">Coefficient</label>
+                        <input id="coefficient" name="coefficient" type="number" min="1" max="10" value="{{ old('coefficient') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900" required>
                     </div>
 
                     <div>
-                        <label for="filiere_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Filière</label>
-                        <select id="filiere_id" name="filiere_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required>
+                        <label for="filiere_id" class="block text-sm font-medium text-gray-700">Filière</label>
+                        <select id="filiere_id" name="filiere_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900" required>
                             <option value="">-- Sélectionner une filière --</option>
                             @foreach($filieres as $filiere)
                                 <option value="{{ $filiere->id }}" {{ old('filiere_id') == $filiere->id ? 'selected' : '' }}>{{ $filiere->nom_filiere }}</option>
@@ -43,8 +43,8 @@
                     </div>
 
                     <div>
-                        <label for="classe_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Classe (optionnel)</label>
-                        <select id="classe_id" name="classe_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600">
+                        <label for="classe_id" class="block text-sm font-medium text-gray-700">Classe (optionnel)</label>
+                        <select id="classe_id" name="classe_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900">
                             <option value="">-- Aucune classe spécifique --</option>
                             @if(isset($classes))
                                 @foreach($classes as $classe)

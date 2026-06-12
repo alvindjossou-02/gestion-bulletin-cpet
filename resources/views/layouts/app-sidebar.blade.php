@@ -161,7 +161,7 @@
             align-items: center;
             gap: 12px;
             padding: 12px 20px;
-            color: rgba(255, 255, 255, 0.8);
+            color: white;
             text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
@@ -189,6 +189,11 @@
             border-radius: 0 8px 8px 0;
         }
 
+        .nav-link.active .nav-link-text {
+            color: var(--color-primary);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
         .nav-link.active::before {
             content: '';
             position: absolute;
@@ -207,7 +212,9 @@
 
         .nav-link-text {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .sidebar-toggle {
@@ -243,7 +250,7 @@
             padding: 16px 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .sidebar.collapsed .sidebar-footer {

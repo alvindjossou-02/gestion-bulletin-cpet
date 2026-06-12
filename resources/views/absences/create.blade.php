@@ -24,12 +24,12 @@
 
                     <!-- Filière Selection -->
                     <div>
-                        <label for="filiere_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Filière</label>
-                        <select name="filiere_id" id="filiere_id" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <label for="filiere_id" class="block text-sm font-medium text-gray-700 mb-2">Filière</label>
+                        <select name="filiere_id" id="filiere_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900">
                             <option value="">-- Sélectionner une filière --</option>
                             @foreach($filieres as $filiere)
                                 <option value="{{ $filiere->id }}" {{ old('filiere_id') == $filiere->id ? 'selected' : '' }}>
-                                    {{ $filiere->nom }}
+                                    {{ $filiere->nom_filiere }}
                                 </option>
                             @endforeach
                         </select>
@@ -37,36 +37,36 @@
 
                     <!-- Classe Selection -->
                     <div>
-                        <label for="classe_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Classe</label>
-                        <select name="classe_id" id="classe_id" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" disabled>
+                        <label for="classe_id" class="block text-sm font-medium text-gray-700 mb-2">Classe</label>
+                        <select name="classe_id" id="classe_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900" disabled>
                             <option value="">-- Sélectionner une classe --</option>
                         </select>
                     </div>
 
                     <!-- Apprenant Selection -->
                     <div>
-                        <label for="apprenant_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Apprenant</label>
-                        <select name="apprenant_id" id="apprenant_id" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required disabled>
+                        <label for="apprenant_id" class="block text-sm font-medium text-gray-700 mb-2">Apprenant</label>
+                        <select name="apprenant_id" id="apprenant_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900" required disabled>
                             <option value="">-- Sélectionner un apprenant --</option>
                         </select>
                     </div>
 
                     <!-- Date d'absence -->
                     <div>
-                        <label for="date_absence" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Date d'absence</label>
-                        <input type="date" name="date_absence" id="date_absence" value="{{ old('date_absence') }}" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        <label for="date_absence" class="block text-sm font-medium text-gray-700 mb-2">Date d'absence</label>
+                        <input type="date" name="date_absence" id="date_absence" value="{{ old('date_absence') }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900" required>
                     </div>
 
                     <!-- Justification -->
                     <div class="flex items-center">
-                        <input type="checkbox" name="justifiee" id="justifiee" value="1" class="rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-blue-600 focus:ring-blue-500" {{ old('justifiee') ? 'checked' : '' }}>
-                        <label for="justifiee" class="ms-2 text-sm font-medium text-gray-700 dark:text-gray-300">Absence justifiée</label>
+                        <input type="checkbox" name="justifiee" id="justifiee" value="1" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500" {{ old('justifiee') ? 'checked' : '' }}>
+                        <label for="justifiee" class="ms-2 text-sm font-medium text-gray-700">Absence justifiée</label>
                     </div>
 
                     <!-- Motif -->
                     <div>
-                        <label for="motif" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Motif (optionnel)</label>
-                        <input type="text" name="motif" id="motif" value="{{ old('motif') }}" placeholder="Ex: Maladie, Rendez-vous médical, etc." class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <label for="motif" class="block text-sm font-medium text-gray-700 mb-2">Motif (optionnel)</label>
+                        <input type="text" name="motif" id="motif" value="{{ old('motif') }}" placeholder="Ex: Maladie, Rendez-vous médical, etc." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900">
                     </div>
 
                     <!-- Form Actions -->
@@ -136,7 +136,7 @@
                 filiere.classes.forEach(classe => {
                     const option = document.createElement('option');
                     option.value = classe.id;
-                    option.textContent = classe.nom;
+                    option.textContent = classe.nom_classe;
                     classeSelect.appendChild(option);
                 });
             }

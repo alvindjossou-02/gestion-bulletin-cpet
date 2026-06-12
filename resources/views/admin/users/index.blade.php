@@ -5,19 +5,19 @@
 @section('content')
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900">
                 <div class="flex justify-between items-center mb-6">
                     <h1 class="text-2xl font-bold">Gestion des Utilisateurs</h1>
-                    <a href="{{ route('admin.users.create') }}" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                    <a href="{{ route('admin.users.create') }}" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                         Ajouter un utilisateur
                     </a>
                 </div>
 
                 @if($users->count())
                     <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gradient-to-r from-blue-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-600 dark:text-gray-300">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <thead class="text-xs text-gray-700 uppercase bg-gradient-to-r from-blue-50 to-blue-100">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">Nom</th>
                                     <th scope="col" class="px-6 py-3">Email</th>
@@ -27,13 +27,13 @@
                             </thead>
                             <tbody>
                                 @foreach($users as $user)
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ $user->name }}</td>
+                                    <tr class="bg-white border-b">
+                                        <td class="px-6 py-4 font-medium text-gray-900">{{ $user->name }}</td>
                                         <td class="px-6 py-4">{{ $user->email }}</td>
                                         <td class="px-6 py-4">
                                             <div class="flex flex-wrap gap-2">
                                                 @forelse($user->roles as $role)
-                                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
+                                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-100 text-blue-800">
                                                         <span class="text-sm font-medium">{{ ucfirst(str_replace('_', ' ', $role->name)) }}</span>
                                                         <form method="POST" action="{{ route('admin.users.remove-role', ['user' => $user->id, 'role' => $role->name]) }}" class="inline" onsubmit="return confirm('Êtes-vous sûr de vouloir retirer ce rôle ?');">
                                                             @csrf
@@ -49,7 +49,7 @@
                                         <td class="px-6 py-4">
                                             <form method="POST" action="{{ route('admin.users.assign-role', $user->id) }}" class="inline-flex gap-2 items-center">
                                                 @csrf
-                                                <select name="role" class="text-xs rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300" required>
+                                                <select name="role" class="text-xs rounded border-gray-300 bg-white text-gray-900" required>
                                                     <option value="">Assigner rôle</option>
                                                     @foreach($roles as $role)
                                                         @if(!$user->hasRole($role->name))

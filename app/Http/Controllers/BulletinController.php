@@ -56,7 +56,6 @@ class BulletinController extends Controller
         return redirect()->route('bulletins.index')
             ->with('success', 'Bulletin créé avec succès! Un email de notification a été envoyé.');
     }
-    }
 
     /**
      * Afficher les détails d'un bulletin

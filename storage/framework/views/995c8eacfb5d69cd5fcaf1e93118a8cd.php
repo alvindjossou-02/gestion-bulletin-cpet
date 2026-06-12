@@ -22,12 +22,12 @@
 
                     <!-- Filière Selection -->
                     <div>
-                        <label for="filiere_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Filière</label>
-                        <select name="filiere_id" id="filiere_id" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <label for="filiere_id" class="block text-sm font-medium text-gray-700 mb-2">Filière</label>
+                        <select name="filiere_id" id="filiere_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900">
                             <option value="">-- Sélectionner une filière --</option>
                             <?php $__currentLoopData = $filieres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $filiere): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($filiere->id); ?>" <?php echo e(old('filiere_id') == $filiere->id ? 'selected' : ''); ?>>
-                                    <?php echo e($filiere->nom); ?>
+                                    <?php echo e($filiere->nom_filiere); ?>
 
                                 </option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -36,24 +36,24 @@
 
                     <!-- Classe Selection -->
                     <div>
-                        <label for="classe_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Classe</label>
-                        <select name="classe_id" id="classe_id" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" disabled>
+                        <label for="classe_id" class="block text-sm font-medium text-gray-700 mb-2">Classe</label>
+                        <select name="classe_id" id="classe_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900" disabled>
                             <option value="">-- Sélectionner une classe --</option>
                         </select>
                     </div>
 
                     <!-- Apprenant Selection -->
                     <div>
-                        <label for="apprenant_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Apprenant</label>
-                        <select name="apprenant_id" id="apprenant_id" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required disabled>
+                        <label for="apprenant_id" class="block text-sm font-medium text-gray-700 mb-2">Apprenant</label>
+                        <select name="apprenant_id" id="apprenant_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900" required disabled>
                             <option value="">-- Sélectionner un apprenant --</option>
                         </select>
                     </div>
 
                     <!-- Matière Selection -->
                     <div>
-                        <label for="matiere_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Matière</label>
-                        <select name="matiere_id" id="matiere_id" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required disabled>
+                        <label for="matiere_id" class="block text-sm font-medium text-gray-700 mb-2">Matière</label>
+                        <select name="matiere_id" id="matiere_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900" required disabled>
                             <option value="">-- Sélectionner une matière --</option>
                             <?php $__currentLoopData = $matieres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $matiere): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($matiere->id); ?>" <?php echo e(old('matiere_id') == $matiere->id ? 'selected' : ''); ?>>
@@ -66,8 +66,8 @@
 
                     <!-- Type d'Evaluation -->
                     <div>
-                        <label for="type_evaluation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Type d'Évaluation</label>
-                        <select name="type_evaluation" id="type_evaluation" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        <label for="type_evaluation" class="block text-sm font-medium text-gray-700 mb-2">Type d'Évaluation</label>
+                        <select name="type_evaluation" id="type_evaluation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900" required>
                             <option value="">-- Sélectionner un type --</option>
                             <option value="Devoir" <?php echo e(old('type_evaluation') == 'Devoir' ? 'selected' : ''); ?>>Devoir</option>
                             <option value="Interrogation" <?php echo e(old('type_evaluation') == 'Interrogation' ? 'selected' : ''); ?>>Interrogation</option>
@@ -78,8 +78,8 @@
 
                     <!-- Note Value -->
                     <div>
-                        <label for="note" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Note (0-20)</label>
-                        <input type="number" name="note" id="note" min="0" max="20" step="0.5" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required value="<?php echo e(old('note')); ?>">
+                        <label for="note" class="block text-sm font-medium text-gray-700 mb-2">Note (0-20)</label>
+                        <input type="number" name="note" id="note" min="0" max="20" step="0.5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900" required value="<?php echo e(old('note')); ?>">
                     </div>
 
                     <!-- Form Actions -->

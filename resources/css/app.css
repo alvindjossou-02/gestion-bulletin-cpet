@@ -77,3 +77,110 @@ tbody tr:hover {
 .bg-blue-50 {
     background-color: #EFF6FF !important;
 }
+
+/* Sélects et Inputs - Correction globale */
+select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+textarea {
+    background-color: white !important;
+    color: #111827 !important;
+    border-color: #D1D5DB !important;
+}
+
+select option {
+    background-color: white !important;
+    color: #111827 !important;
+}
+
+select option:hover {
+    background-color: #F3F4F6 !important;
+    color: #111827 !important;
+}
+
+/* Supprimer les classes dark qui cassent le contraste */
+select.dark\:bg-gray-700,
+select.dark\:text-white,
+input.dark\:bg-gray-700,
+input.dark\:text-white,
+textarea.dark\:bg-gray-700,
+textarea.dark\:text-white {
+    background-color: white !important;
+    color: #111827 !important;
+}
+
+/* Focus états visibles */
+select:focus,
+input:focus,
+textarea:focus {
+    outline: none !important;
+    border-color: #0052CC !important;
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1) !important;
+    background-color: white !important;
+    color: #111827 !important;
+}
+
+/* Boutons */
+button:not(.sidebar-toggle):not(.profile-button):not(.dropdown-item):not([type="checkbox"]):not([type="radio"]):not(.text-red-600):not(.text-red-500) {
+    background-color: auto !important;
+    color: white !important;
+}
+
+button[type="submit"]:not(.text-red-600):not(.text-red-500) {
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+/* Boutons suppression / danger - Force le rouge */
+button[style*="DC2626"],
+button[style*="color: #DC2626"],
+a[style*="color: #DC2626"],
+button.text-red-600,
+button.text-red-500,
+button.bg-red-500,
+a.text-red-600 {
+    color: #DC2626 !important;
+}
+
+button.bg-red-500 {
+    background-color: #EF4444 !important;
+    color: white !important;
+}
+
+button.bg-red-500:hover,
+button.hover\:bg-red-600:hover {
+    background-color: #DC2626 !important;
+}
+
+/* Disabled selects */
+select:disabled {
+    background-color: #F3F4F6 !important;
+    color: #6B7280 !important;
+    cursor: not-allowed !important;
+}
+
+/* Links texte */
+a:not([style*="color"]):not(.text-red-600):not(.text-red-500):not(.bg-red-500) {
+    color: #0052CC !important;
+}
+
+a:hover:not([style*="color"]):not(.text-red-600):not(.text-red-500):not(.bg-red-500) {
+    color: #003D99 !important;
+    text-decoration: underline !important;
+}
+
+/* Force rouge pour les boutons danger */
+a.text-red-600,
+a.text-red-500,
+button.text-red-600,
+button.text-red-500 {
+    color: #DC2626 !important;
+}
+
+a.text-red-600:hover,
+button.text-red-600:hover {
+    color: #991B1B !important;
+}

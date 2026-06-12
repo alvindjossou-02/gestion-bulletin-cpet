@@ -5,12 +5,12 @@
 @section('content')
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900">
                 <h1 class="text-2xl font-bold mb-6">Ajouter une filière</h1>
 
                 @if($errors->any())
-                    <div class="mb-4 p-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+                    <div class="mb-4 p-4 text-sm text-red-800 rounded-lg bg-red-50">
                         <ul>
                             @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -23,8 +23,8 @@
                     @csrf
 
                     <div>
-                        <label for="nom_filiere" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nom de la filière</label>
-                        <input id="nom_filiere" name="nom_filiere" type="text" value="{{ old('nom_filiere') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600" required>
+                        <label for="nom_filiere" class="block text-sm font-medium text-gray-700">Nom de la filière</label>
+                        <input id="nom_filiere" name="nom_filiere" type="text" value="{{ old('nom_filiere') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-white text-gray-900" required>
                     </div>
 
                     <div class="flex gap-4">
